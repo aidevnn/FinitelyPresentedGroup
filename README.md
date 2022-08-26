@@ -1,5 +1,5 @@
 # FinitelyPresentedGroup
-Bruteforce algorithm for creating all elements of a group presented by generators and relations.
+Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very very slow even for smallest group.
 
 (In Progress)
 
