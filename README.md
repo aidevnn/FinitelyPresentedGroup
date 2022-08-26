@@ -4,7 +4,9 @@ Bruteforce algorithm for creating all elements of a group presented by generator
 (In Progress)
 
 ``` 
-var wstr = Relation.Structure("a4").Rewrite(Relation.Structure("a2b-2")).Rewrite(Relation.Structure("a-1bab"));
+var wstr = Relation.Structure("a4")
+            .Rewrite(Relation.Structure("a2b-2"))
+            .Rewrite(Relation.Structure("a-1bab"));
 
 var wstr0 = new WordStructure(wstr);
 while (true)

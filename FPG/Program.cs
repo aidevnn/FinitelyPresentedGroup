@@ -14,7 +14,9 @@
 // var wstr = Relation.Structure("a4").Rewrite(Relation.Structure("b2")).Rewrite(Relation.Structure("abab"));
 // var wstr = Relation.Structure("a3").Rewrite(Relation.Structure("b2")).Rewrite(Relation.Structure("aba-1b-1"));
 
-var wstr = Relation.Structure("a4").Rewrite(Relation.Structure("a2b-2")).Rewrite(Relation.Structure("a-1bab"));
+var wstr = Relation.Structure("a4")
+            .Rewrite(Relation.Structure("a2b-2"))
+            .Rewrite(Relation.Structure("a-1bab"));
 
 var wstr0 = new WordStructure(wstr);
 while (true)
