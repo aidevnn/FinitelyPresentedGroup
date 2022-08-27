@@ -43,6 +43,12 @@ void Generate(params string[] relations)
 
 // Generate("a2", "b2", "abab"); // D2
 
-Generate("a3", "b6", "ab = ba"); // C3 x C6 
+// Generate("a3", "b6", "ab = ba"); // C3 x C6 
 
 // Generate("a6"); // C6
+
+Generate("a3", "b2", "aba-1b-1"); // C6
+
+Generate("a4", "a2b-2", "b-1aba"); // H8
+
+Generate("a3", "b6", "ab = ba"); // C3 x C6 

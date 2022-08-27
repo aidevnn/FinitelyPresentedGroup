@@ -15,7 +15,7 @@ will produce
 
 ```
 G = { (), a, b, a-1, ab, ba-1 }
-|G| = 6
+Order = 6; Total Words : 23
 
 ()   => ( 0: 0) 
 a    => ( 1: 1) a
@@ -62,12 +62,12 @@ Repr : ba-1
     ba-1 => ( 2: 2) bA
     a-1b => ( 2: 2) Ab
 
-Total Time : 314 ms
+Total Time : 489 ms
 ```
 and
 ```
 G = { (), a, b, a-1, b-1, a2, ab, ab-1 }
-|G| = 8
+Order = 8; Total Words : 52
 
 ()   => ( 0: 0) 
 a    => ( 1: 1) a
@@ -149,13 +149,12 @@ Repr : ab-1
     b-1a-1 => ( 2: 2) BA
     ab3    => ( 2: 4) abbb
 
-Total Time : 7197 ms
-
+Total Time : 6793 ms
 ```
 and
 ```
 G = { (), a, b, a-1, b-1, b2, b-2, b3, ab, ab-1, ba-1, a-1b-1, ab2, ab-2, a-1b2, a-1b-2, ab3, a-1b3 }
-|G| = 18
+Order = 18; Total Words : 65
 
 ()     => ( 0: 0) 
 a      => ( 1: 1) a
@@ -280,6 +279,5 @@ Repr : a-1b3
     b3a-1  => ( 2: 4) bbbA
     ba-1b2 => ( 3: 4) bAbb
 
-Total Time : 10426 ms
-
+Total Time : 10257 ms
 ```

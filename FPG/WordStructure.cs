@@ -49,7 +49,7 @@ public class WordStructure
     public void DisplayReprs()
     {
         Console.WriteLine("G = {{ {0} }}", sets.Select(a => a.Key).Ascending().Glue(", "));
-        Console.WriteLine($"|G| = {sets.Count}");
+        Console.WriteLine($"Order = {sets.Count}; Total Words : {Count}");
         Console.WriteLine();
 
         var digits = sets.Select(ws => ws.Key).Select(w => w.ToString().Length).Max();
