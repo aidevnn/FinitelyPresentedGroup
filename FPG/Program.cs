@@ -42,7 +42,13 @@ void Generate(params string[] relations)
 
 Generate("a2", "b2", "ababab"); // S3
 
+// Generate("a2", "b2", "c2", "aba = c", "ababab"); // S3
+
+// Generate("a2", "b2", "c3", "ab = c"); // S3
+
 // Generate("a2", "b2", "abab"); // Klein
+
+// Generate("a6"); // C6
 
 // Generate("a3", "b2", "aba-1b-1"); // C6
 
