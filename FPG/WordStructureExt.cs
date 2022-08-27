@@ -125,8 +125,6 @@ public static class WordStructureExt
         Console.WriteLine(head);
         Console.WriteLine(Enumerable.Repeat('-', head.Length).Glue());
         List<string> rows = new();
-        List<bool> seq = new();
-        var hset = keys.ToHashSet();
         foreach (var w0 in keys.Skip(1))
         {
             List<Word> row = new();
@@ -136,7 +134,7 @@ public static class WordStructureExt
                 var w3 = wordStructure.RewriteWord(w2);
                 row.Add(w3);
             }
-            seq.Add(hset.SetEquals(row));
+
             var rowStr = string.Format("{0} | {1}", string.Format(fmt, w0.extStr2), row.Select(w => w.extStr2).Glue(" ", fmt));
             Console.WriteLine(rowStr);
         }
