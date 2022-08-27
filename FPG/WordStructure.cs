@@ -46,14 +46,16 @@ public class WordStructure
         Console.WriteLine();
     }
 
-    public void DisplayKeys()
+    public void DisplayReprs()
     {
+        Console.WriteLine("G = {{ {0} }}", sets.Select(a => a.Key).Ascending().Glue(", "));
+        Console.WriteLine($"|G| = {sets.Count}");
+        Console.WriteLine();
+
         var digits = sets.Select(ws => ws.Key).Select(w => w.ToString().Length).Max();
         foreach (var ws in sets.OrderBy(a => a.Key).ThenBy(a => a.Count))
             Console.WriteLine(ws.Key.Details(digits));
 
-        Console.WriteLine(sets.Select(a => a.Key).Ascending().Glue(", "));
-        Console.WriteLine($"Total : {sets.Count}");
         Console.WriteLine();
     }
 }

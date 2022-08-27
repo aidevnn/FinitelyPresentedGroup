@@ -68,10 +68,9 @@ public static class WordStructureExt
     }
 
     static Stopwatch sw = new Stopwatch();
-    static int loop = 0;
-    public static WordStructure Product(this WordStructure wstr)
+    public static int loop = 0;
+    public static WordStructure Develop(this WordStructure wstr)
     {
-        StringExt.CountTotal1 = StringExt.CountTotal2 = 0;
         sw.Restart();
         var wsets = wstr.WSets();
         // Console.WriteLine(wsets.Sum(ws => ws.Count));
@@ -88,7 +87,8 @@ public static class WordStructureExt
         foreach (var ws in sets)
             wstr0 = new WordStructure(ws, wstr0);
 
-        Console.WriteLine($"Loop:{++loop,3}; Time:{sw.ElapsedMilliseconds} ms; Total1:{StringExt.CountTotal1}; Total2:{StringExt.CountTotal2}");
+        Console.WriteLine($"Loop:{++loop,3}; Time:{sw.ElapsedMilliseconds} ms");
+        Console.WriteLine();
         return wstr0;
     }
 
@@ -97,14 +97,14 @@ public static class WordStructureExt
         var keys = wordStructure.WSets().Select(ws => ws.Key).Ascending().ToList();
         var digits = keys.Max(w => w.extStr.Length);
         var fmt = $"{{0,{digits}}}";
-        var head = string.Format("{0} | {1}", string.Format(fmt, " "), keys.Select(w => w.extStr2).Glue(" ", fmt));
+        var head = string.Format("{0} | {1}", string.Format(fmt, "()"), keys.Skip(1).Select(w => w.extStr2).Glue(" ", fmt));
         Console.WriteLine(head);
         Console.WriteLine(Enumerable.Repeat('-', head.Length).Glue());
         List<string> rows = new();
-        foreach (var w0 in keys)
+        foreach (var w0 in keys.Skip(1))
         {
             List<Word> row = new();
-            foreach (var w1 in keys)
+            foreach (var w1 in keys.Skip(1))
             {
                 var w2 = new Word(w0.extStr + w1.extStr);
                 var w3 = wordStructure.Rewrite(w2);

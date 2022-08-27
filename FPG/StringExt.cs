@@ -2,8 +2,6 @@ namespace FPG;
 
 public static class StringExt
 {
-    public static int CountTotal1 = 0;
-    public static int CountTotal2 = 0;
     public static string JoinChars(this IEnumerable<char> cs) => string.Join("", cs);
     public static bool AreInvert(char c0, char c1)
     {
@@ -29,7 +27,6 @@ public static class StringExt
                 stack.Push(c);
         }
 
-        ++CountTotal2;
         return string.Join("", stack.Reverse());
     }
 
@@ -38,7 +35,6 @@ public static class StringExt
         var nword = word;
         while (true)
         {
-            ++CountTotal1;
             int sz0 = nword.Length;
             nword = nword.Replace(pattern, substitute);
             int sz1 = nword.Length;

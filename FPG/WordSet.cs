@@ -14,8 +14,8 @@ public class WordSet : HashSet<Word>
 
     public void Display()
     {
-        Console.WriteLine($"Repr : {Key}");
         var digits = this.Max(w => w.ToString().Length);
+        Console.WriteLine($"Repr : {Key}");
         foreach (var w in this.Ascending())
             Console.WriteLine($"    {w.Details(digits)}");
     }

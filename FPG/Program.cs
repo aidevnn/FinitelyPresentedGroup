@@ -1,34 +1,44 @@
 ﻿using FPG;
+using System.Diagnostics;
 
-// var wstr = Relation.Structure("a2")
-//             .Rewrite(Relation.Structure("b2"))
-//             .Rewrite(Relation.Structure("c2"))
-//             .Rewrite(Relation.Structure("bcbcbc"))
-//             .Rewrite(Relation.Structure("acacac"))
-//             .Rewrite(Relation.Structure("abab"));
-
-// var wstr = Relation.Structure("a3")
-//             .Rewrite(Relation.Structure("b4"))
-//             .Rewrite(Relation.Structure("abab"));
-
-// var wstr = Relation.Structure("a4").Rewrite(Relation.Structure("b2")).Rewrite(Relation.Structure("abab"));
-// var wstr = Relation.Structure("a3").Rewrite(Relation.Structure("b2")).Rewrite(Relation.Structure("aba-1b-1"));
-
-var wstr = Relation.Structure("a4")
-            .Rewrite(Relation.Structure("a2b-2"))
-            .Rewrite(Relation.Structure("a-1bab"));
-
-var wstr0 = new WordStructure(wstr);
-while (true)
+void Generate(params string[] relations)
 {
-    int sz0 = wstr0.Count;
-    wstr0 = wstr0.Product();
-    if (sz0 == wstr0.Count)
-        break;
+    var sw = Stopwatch.StartNew();
+    if (relations.Length == 0) return;
+    Queue<string> rels = new(relations);
+    var wstr = Relation.Structure(rels.Dequeue());
+    while (rels.Count != 0)
+        wstr = wstr.Rewrite(Relation.Structure(rels.Dequeue()));
+
+    WordStructureExt.loop = 0;
+    while (true)
+    {
+        int sz0 = wstr.Count;
+        wstr = wstr.Develop();
+        if (sz0 == wstr.Count)
+            break;
+    }
+
+    sw.Stop();
+
+    wstr.DisplayReprs();
+    wstr.GroupTable();
+    Console.WriteLine();
+
+    wstr.Display();
+    Console.WriteLine($"Total Time : {sw.ElapsedMilliseconds} ms");
 }
 
-wstr0.DisplayKeys();
-wstr0.GroupTable();
-Console.WriteLine();
+// Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
 
-wstr0.Display();
+// Generate("a4", "b3", "abab");
+
+Generate("a4", "a2b-2", "b-1aba"); // H8
+
+// Generate("a4", "b2", "abab"); // D4
+
+// Generate("a3", "b2", "abab");
+
+// Generate("a3", "b2", "aba-1b-1"); // C6
+
+// Generate("a6"); // C6
