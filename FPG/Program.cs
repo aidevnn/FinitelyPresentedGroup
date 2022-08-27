@@ -39,6 +39,6 @@ Generate("a4", "a2b-2", "b-1aba"); // H8
 
 // Generate("a3", "b2", "abab");
 
-// Generate("a3", "b2", "aba-1b-1"); // C6
+Generate("a3", "b2", "aba-1b-1"); // C6
 
 // Generate("a6"); // C6

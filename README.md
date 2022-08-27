@@ -4,11 +4,65 @@ Bruteforce algorithm for creating all elements of a group presented by generator
 (In Progress)
 
 ``` 
+Generate("a3", "b2", "aba-1b-1"); // C6
+
 Generate("a4", "a2b-2", "b-1aba"); // H8
 ```
 
 will produce
 
+```
+G = { (), a, b, a-1, ab, ba-1 }
+|G| = 6
+
+()   => ( 0: 0) 
+a    => ( 1: 1) a
+b    => ( 1: 1) b
+a-1  => ( 1: 1) A
+ab   => ( 2: 2) ab
+ba-1 => ( 2: 2) bA
+
+() |  a  b  A ab bA
+-------------------
+ a |  A ab () bA  b
+ b | ab () bA  a  A
+ A | () bA  a  b ab
+ab | bA  a  b  A ()
+bA |  b  A ab ()  a
+
+Repr : ()
+    ()     => ( 0: 0) 
+    b2     => ( 1: 2) bb
+    b-2    => ( 1: 2) BB
+    a3     => ( 1: 3) aaa
+    a-3    => ( 1: 3) AAA
+    aba-1b => ( 4: 4) abAb
+    baba-1 => ( 4: 4) babA
+    ba-1ba => ( 4: 4) bAba
+    a-1bab => ( 4: 4) Abab
+Repr : a
+    a   => ( 1: 1) a
+    a-2 => ( 1: 2) AA
+    bab => ( 3: 3) bab
+Repr : b
+    b     => ( 1: 1) b
+    b-1   => ( 1: 1) B
+    aba-1 => ( 3: 3) abA
+    a-1ba => ( 3: 3) Aba
+Repr : a-1
+    a-1   => ( 1: 1) A
+    a2    => ( 1: 2) aa
+    ba-1b => ( 3: 3) bAb
+Repr : ab
+    ab => ( 2: 2) ab
+    ba => ( 2: 2) ba
+Repr : ba-1
+    ba-1 => ( 2: 2) bA
+    a-1b => ( 2: 2) Ab
+
+Total Time : 314 ms
+```
+and
 ```
 G = { (), a, b, a-1, b-1, a2, ab, ab-1 }
 |G| = 8
