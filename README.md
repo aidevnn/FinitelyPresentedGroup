@@ -4,25 +4,123 @@ Bruteforce algorithm for creating all elements of a group presented by generator
 (In Progress)
 
 ``` 
+Generate("a2", "b2", "ababab"); // S3
+
+Generate("a2", "b2", "abab"); // Klein
+
 Generate("a3", "b2", "aba-1b-1"); // C6
 
 Generate("a4", "a2b-2", "b-1aba"); // H8
 
 Generate("a3", "b6", "ab = ba"); // C3 x C6 
+
 ```
 
 will produce
+```
+G = { (), a, b, ab, ba, aba }
+()  => ( 0: 0) 
+a   => ( 1: 1) a
+b   => ( 1: 1) b
+ab  => ( 2: 2) ab
+ba  => ( 2: 2) ba
+aba => ( 3: 3) aba
 
+Order = 6
+Is Group   : True
+Is Abelian : False
+
+ () |   a   b  ab  ba aba
+-------------------------
+  a |  ()  ab   b aba  ba
+  b |  ba  () aba   a  ab
+ ab | aba   a  ba  ()   b
+ ba |   b aba  ()  ab   a
+aba |  ab  ba   a   b  ()
+
+Repr : ()
+    ()     => ( 0: 0) 
+    a2     => ( 1: 2) aa
+    b2     => ( 1: 2) bb
+    a-2    => ( 1: 2) AA
+    b-2    => ( 1: 2) BB
+    ababab => ( 6: 6) ababab
+    bababa => ( 6: 6) bababa
+Repr : a
+    a     => ( 1: 1) a
+    a-1   => ( 1: 1) A
+    babab => ( 5: 5) babab
+Repr : b
+    b     => ( 1: 1) b
+    b-1   => ( 1: 1) B
+    ababa => ( 5: 5) ababa
+Repr : ab
+    ab   => ( 2: 2) ab
+    baba => ( 4: 4) baba
+Repr : ba
+    ba   => ( 2: 2) ba
+    abab => ( 4: 4) abab
+Repr : aba
+    aba => ( 3: 3) aba
+    bab => ( 3: 3) bab
+
+Total Words : 19
+Total Time  : 389 ms
+```
+and
+```
+G = { (), a, b, ab }
+() => ( 0: 0)
+a  => ( 1: 1) a
+b  => ( 1: 1) b
+ab => ( 2: 2) ab
+
+Order = 4
+Is Group   : True
+Is Abelian : True
+
+() |  a  b ab
+-------------
+ a | () ab  b
+ b | ab ()  a
+ab |  b  a ()
+
+Repr : ()
+    ()   => ( 0: 0)
+    a2   => ( 1: 2) aa
+    b2   => ( 1: 2) bb
+    a-2  => ( 1: 2) AA
+    b-2  => ( 1: 2) BB
+    abab => ( 4: 4) abab
+    baba => ( 4: 4) baba
+Repr : a
+    a   => ( 1: 1) a
+    a-1 => ( 1: 1) A
+    bab => ( 3: 3) bab
+Repr : b
+    b   => ( 1: 1) b
+    b-1 => ( 1: 1) B
+    aba => ( 3: 3) aba
+Repr : ab
+    ab => ( 2: 2) ab
+    ba => ( 2: 2) ba
+
+Total Words : 15
+Total Time  : 175 ms
+```
+and
 ```
 G = { (), a, b, a-1, ab, ba-1 }
-Order = 6; Total Words : 23
-
-()   => ( 0: 0) 
+()   => ( 0: 0)
 a    => ( 1: 1) a
 b    => ( 1: 1) b
 a-1  => ( 1: 1) A
 ab   => ( 2: 2) ab
 ba-1 => ( 2: 2) bA
+
+Order = 6
+Is Group   : True
+Is Abelian : True
 
 () |  a  b  A ab bA
 -------------------
@@ -33,7 +131,7 @@ ab | bA  a  b  A ()
 bA |  b  A ab ()  a
 
 Repr : ()
-    ()     => ( 0: 0) 
+    ()     => ( 0: 0)
     b2     => ( 1: 2) bb
     b-2    => ( 1: 2) BB
     a3     => ( 1: 3) aaa
@@ -62,14 +160,14 @@ Repr : ba-1
     ba-1 => ( 2: 2) bA
     a-1b => ( 2: 2) Ab
 
-Total Time : 489 ms
+Total Words : 23
+Total Time  : 446 ms
 ```
 and
 ```
-G = { (), a, b, a-1, b-1, a2, ab, ab-1 }
-Order = 8; Total Words : 52
 
-()   => ( 0: 0) 
+G = { (), a, b, a-1, b-1, a2, ab, ab-1 }
+()   => ( 0: 0)
 a    => ( 1: 1) a
 b    => ( 1: 1) b
 a-1  => ( 1: 1) A
@@ -77,6 +175,10 @@ b-1  => ( 1: 1) B
 a2   => ( 1: 2) aa
 ab   => ( 2: 2) ab
 ab-1 => ( 2: 2) aB
+
+Order = 8
+Is Group   : True
+Is Abelian : False
 
 () |  a  b  A  B aa ab aB
 -------------------------
@@ -89,7 +191,7 @@ ab |  b  A  B  a aB aa ()
 aB |  B  a  b  A ab () aa
 
 Repr : ()
-    ()         => ( 0: 0) 
+    ()         => ( 0: 0)
     a4         => ( 1: 4) aaaa
     a-4        => ( 1: 4) AAAA
     a2b2       => ( 2: 4) aabb
@@ -149,14 +251,14 @@ Repr : ab-1
     b-1a-1 => ( 2: 2) BA
     ab3    => ( 2: 4) abbb
 
-Total Time : 6793 ms
+Total Words : 52
+Total Time  : 7296 ms
 ```
 and
 ```
-G = { (), a, b, a-1, b-1, b2, b-2, b3, ab, ab-1, ba-1, a-1b-1, ab2, ab-2, a-1b2, a-1b-2, ab3, a-1b3 }
-Order = 18; Total Words : 65
 
-()     => ( 0: 0) 
+G = { (), a, b, a-1, b-1, b2, b-2, b3, ab, ab-1, ba-1, a-1b-1, ab2, ab-2, a-1b2, a-1b-2, ab3, a-1b3 }
+()     => ( 0: 0)
 a      => ( 1: 1) a
 b      => ( 1: 1) b
 a-1    => ( 1: 1) A
@@ -174,6 +276,10 @@ a-1b2  => ( 2: 3) Abb
 a-1b-2 => ( 2: 3) ABB
 ab3    => ( 2: 4) abbb
 a-1b3  => ( 2: 4) Abbb
+
+Order = 18
+Is Group   : True
+Is Abelian : True
 
   () |    a    b    A    B   bb   BB  bbb   ab   aB   bA   AB  abb  aBB  Abb  ABB abbb Abbb
 -------------------------------------------------------------------------------------------
@@ -196,7 +302,7 @@ abbb | Abbb  aBB  bbb  abb   aB   ab    a  ABB  Abb   BB   bb   AB   bA    B    
 Abbb |  bbb  ABB abbb  Abb   AB   bA    A   BB   bb  aBB  abb    B    b   aB   ab   ()    a
 
 Repr : ()
-    ()       => ( 0: 0) 
+    ()       => ( 0: 0)
     a3       => ( 1: 3) aaa
     a-3      => ( 1: 3) AAA
     b6       => ( 1: 6) bbbbbb
@@ -279,5 +385,6 @@ Repr : a-1b3
     b3a-1  => ( 2: 4) bbbA
     ba-1b2 => ( 3: 4) bAbb
 
-Total Time : 10257 ms
+Total Words : 65
+Total Time  : 10388 ms
 ```

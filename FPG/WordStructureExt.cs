@@ -3,14 +3,15 @@ namespace FPG;
 
 public static class WordStructureExt
 {
-    public static Word Rewrite(this WordStructure wstr, Word w)
+    public static Word RewriteWord(this WordStructure wstr, Word w)
     {
         var wi = w;
-        var pairs = wstr.Pairs();
-        WordSet ws0 = new(pairs.Count());
-        while (true)
+        int s0 = 0;
+        var pairs = wstr.Pairs;
+        HashSet<Word> ws0 = new(pairs.Count());
+        do
         {
-            var s0 = wi.GetHashCode();
+            s0 = wi.GetHashCode();
             foreach (var ws1 in pairs)
             {
                 var substitute = ws1.key;
@@ -21,30 +22,26 @@ public static class WordStructureExt
             }
 
             var wf = ws0.Min();
-            if (s0 == wf.GetHashCode())
-            {
-                // Console.WriteLine($"{wi.extStr} => {wf.extStr}");
-                return wf;
-            }
             ws0.Clear();
             wi = wf;
-        }
-    }
-    public static WordSet Rewrite(this WordStructure wstr, WordSet ws)
-    {
-        // var ws0 = new WordSet(ws);
-        var ws0 = new WordSet();
-        foreach (var w in ws)
-            ws0.Add(wstr.Rewrite(w));
+        } while ((s0 != wi.GetHashCode()));
 
-        return ws0;
+        return wi;
     }
-    public static WordStructure Rewrite(this WordStructure wstr, WordStructure other)
+    public static WordSet RewriteSet(this WordStructure wstr, WordSet ws)
+    {
+        HashSet<Word> ws0 = new();
+        foreach (var w in ws.Content)
+            ws0.Add(wstr.RewriteWord(w));
+
+        return new(ws0);
+    }
+    public static WordStructure RewriteStruct(this WordStructure wstr, WordStructure other)
     {
         var wstr0 = new WordStructure(wstr);
         foreach (var ws in other.WSets())
         {
-            var ws0 = wstr.Rewrite(ws);
+            var ws0 = wstr.RewriteSet(ws);
             wstr0 = new WordStructure(ws0, wstr0);
         }
 
@@ -52,46 +49,67 @@ public static class WordStructureExt
     }
     public static WordSet Product(this WordStructure wstr, WordSet ws0, WordSet ws1)
     {
-        var ws2 = new WordSet();
-        foreach (var w0 in ws0)
+        HashSet<Word> ws2 = new();
+        foreach (var w0 in ws0.Content)
         {
             var wi0 = w0.Invert();
-            foreach (var w1 in ws1)
+            foreach (var w1 in ws1.Content)
             {
                 var w2 = new Word(wi0.extStr + w1.extStr);
-                ws2.Add(wstr.Rewrite(w2));
+                ws2.Add(wstr.RewriteWord(w2));
             }
         }
 
-        // return wstr.Rewrite(ws2);
-        return ws2;
+        return new(ws2);
     }
 
-    static Stopwatch sw = new Stopwatch();
-    public static int loop = 0;
     public static WordStructure Develop(this WordStructure wstr)
     {
-        sw.Restart();
+        var sw = Stopwatch.StartNew();
         var wsets = wstr.WSets();
-        // Console.WriteLine(wsets.Sum(ws => ws.Count));
         var wstr0 = new WordStructure(wstr);
         List<WordSet> sets = new();
         foreach (var ws0 in wsets)
-        {
             foreach (var ws1 in wsets)
-            {
                 sets.Add(wstr.Product(ws0, ws1));
-            }
-        }
 
         foreach (var ws in sets)
             wstr0 = new WordStructure(ws, wstr0);
 
-        Console.WriteLine($"Loop:{++loop,3}; Time:{sw.ElapsedMilliseconds} ms");
-        Console.WriteLine();
+        Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms");
         return wstr0;
     }
+    public static void IsGroup(this WordStructure wordStructure)
+    {
+        var keys = wordStructure.WSets().Select(ws => ws.Key).Ascending().ToHashSet();
+        var isComm = true;
+        foreach (var e0 in keys)
+        {
+            var ei0 = e0.Invert();
+            foreach (var e1 in keys)
+            {
+                var e2 = wordStructure.RewriteWord(new Word(ei0.extStr + e1.extStr));
+                if (isComm)
+                {
+                    var e3 = wordStructure.RewriteWord(new Word(e1.extStr + ei0.extStr));
+                    isComm &= e2.Equals(e3);
+                }
 
+                if (!keys.Contains(e2))
+                {
+                    Console.WriteLine("Is Group   : False");
+                    Console.WriteLine("Is Abelian : False");
+                    Console.WriteLine();
+                    return;
+                }
+            }
+        }
+
+        Console.WriteLine("Is Group   : True");
+        Console.WriteLine($"Is Abelian : {isComm}");
+        Console.WriteLine();
+        return;
+    }
     public static void GroupTable(this WordStructure wordStructure)
     {
         var keys = wordStructure.WSets().Select(ws => ws.Key).Ascending().ToList();
@@ -107,15 +125,18 @@ public static class WordStructureExt
         Console.WriteLine(head);
         Console.WriteLine(Enumerable.Repeat('-', head.Length).Glue());
         List<string> rows = new();
+        List<bool> seq = new();
+        var hset = keys.ToHashSet();
         foreach (var w0 in keys.Skip(1))
         {
             List<Word> row = new();
             foreach (var w1 in keys.Skip(1))
             {
                 var w2 = new Word(w0.extStr + w1.extStr);
-                var w3 = wordStructure.Rewrite(w2);
+                var w3 = wordStructure.RewriteWord(w2);
                 row.Add(w3);
             }
+            seq.Add(hset.SetEquals(row));
             var rowStr = string.Format("{0} | {1}", string.Format(fmt, w0.extStr2), row.Select(w => w.extStr2).Glue(" ", fmt));
             Console.WriteLine(rowStr);
         }

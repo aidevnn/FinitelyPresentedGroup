@@ -1,22 +1,26 @@
 namespace FPG;
 
-public class WordSet : HashSet<Word>
+public class WordSet
 {
-    public WordSet() { }
-    public WordSet(int capacity) : base(capacity) { }
-    public WordSet(IEnumerable<Word> w) : base(w) { }
-    public Word Key => this.Min();
-    public IEnumerable<(Word key, Word value)> Pairs()
+    HashSet<Word> set;
+    public WordSet(IEnumerable<Word> ws)
     {
-        var key = Key;
-        return this.Where(w => w.weight != 0 && w.extStr.Length >= key.extStr.Length).Select(w => (key, w));
+        set = new(ws);
+        Key = set.Min();
+        Pairs = set.Where(w => w.weight != 0 && w.extStr.Length >= Key.extStr.Length).Select(w => (Key, w));
+        Content = set;
     }
+    public Word Key { get; private set; }
+    public IEnumerable<(Word key, Word value)> Pairs { get; }
+    public int Count => set.Count;
+    public bool Overlaps(IEnumerable<Word> ws) => set.Overlaps(ws);
+    public IEnumerable<Word> Content { get; }
 
     public void Display()
     {
-        var digits = this.Max(w => w.ToString().Length);
+        var digits = set.Max(w => w.ToString().Length);
         Console.WriteLine($"Repr : {Key}");
-        foreach (var w in this.Ascending())
+        foreach (var w in set.Ascending())
             Console.WriteLine($"    {w.Details(digits)}");
     }
 }
