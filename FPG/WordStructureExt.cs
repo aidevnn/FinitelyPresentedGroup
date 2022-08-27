@@ -95,6 +95,12 @@ public static class WordStructureExt
     public static void GroupTable(this WordStructure wordStructure)
     {
         var keys = wordStructure.WSets().Select(ws => ws.Key).Ascending().ToList();
+        if (keys.Count > 30)
+        {
+            Console.WriteLine("*** TOO HUGE ***");
+            return;
+        }
+
         var digits = keys.Max(w => w.extStr.Length);
         var fmt = $"{{0,{digits}}}";
         var head = string.Format("{0} | {1}", string.Format(fmt, "()"), keys.Skip(1).Select(w => w.extStr2).Glue(" ", fmt));
