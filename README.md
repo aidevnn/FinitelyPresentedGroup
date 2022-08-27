@@ -4,7 +4,7 @@ Bruteforce algorithm for creating all elements of a group presented by generator
 (In Progress)
 
 ``` 
-WordStructureExt.Generate("a4", "a2b-2", "b-1aba"); // H8
+Generate("a4", "a2b-2", "b-1aba"); // H8
 ```
 
 will produce
