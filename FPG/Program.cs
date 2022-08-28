@@ -33,11 +33,11 @@ void Generate(params string[] relations)
     Console.WriteLine($"Total Time  : {sw.ElapsedMilliseconds} ms; Total Created Words : {WordStructureExt.count}");
 }
 
-// Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
-
 // Generate("a4", "b3", "abab");
 
 // Generate("a4", "b2", "abab"); // D4
+
+// Generate("a2", "b3", "ababab", "abab2=bab2a"); // A4
 
 // Generate("a6"); // C6
 
@@ -45,14 +45,14 @@ void Generate(params string[] relations)
 
 // Generate("a2", "b2", "c2", "aba = c", "ababab"); // S3
 
-Generate("a2", "b2", "ababab"); // S3
+// Generate("a2", "b2", "ababab"); // S3
 
-Generate("a2", "b2", "abab"); // Klein
+// Generate("a2", "b2", "abab"); // Klein
 
-Generate("a3", "b2", "aba-1b-1"); // C6
+// Generate("a3", "b2", "aba-1b-1"); // C6
 
-Generate("a4", "a2b-2", "b-1aba"); // H8
+// Generate("a4", "a2b-2", "b-1aba"); // H8
 
-Generate("a3", "b6", "ab = ba"); // C3 x C6 
+// Generate("a3", "b6", "ab = ba"); // C3 x C6 
 
-Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
+// Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
