@@ -11,6 +11,8 @@ Generate("a4", "a2b-2", "b-1aba"); // H8
 
 Generate("a3", "b6", "ab = ba"); // C3 x C6 
 
+Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
+
 ```
 
 will produce
@@ -384,4 +386,146 @@ Repr : a-1b3
 
 Total Words : 65
 Total Time  : 4666 ms; Total Created Words : 44573
+```
+and
+```
+G = { (), a, b, c, ab, ac, bc, ca, cb, abc, aca, acb, bca, bcb, cab, abca, abcb, acab, bcab, cabc, abcab, acabc, bcabc, abcabc }
+()     => ( 0: 0) 
+a      => ( 1: 1) a
+b      => ( 1: 1) b
+c      => ( 1: 1) c
+ab     => ( 2: 2) ab
+ac     => ( 2: 2) ac
+bc     => ( 2: 2) bc
+ca     => ( 2: 2) ca
+cb     => ( 2: 2) cb
+abc    => ( 3: 3) abc
+aca    => ( 3: 3) aca
+acb    => ( 3: 3) acb
+bca    => ( 3: 3) bca
+bcb    => ( 3: 3) bcb
+cab    => ( 3: 3) cab
+abca   => ( 4: 4) abca
+abcb   => ( 4: 4) abcb
+acab   => ( 4: 4) acab
+bcab   => ( 4: 4) bcab
+cabc   => ( 4: 4) cabc
+abcab  => ( 5: 5) abcab
+acabc  => ( 5: 5) acabc
+bcabc  => ( 5: 5) bcabc
+abcabc => ( 6: 6) abcabc
+
+Order = 24
+Is Group   : True
+Is Abelian : False
+
+    () |      a      b      c     ab     ac     bc     ca     cb    abc    aca    acb    bca    bcb    cab   abca   abcb   acab   bcab   cabc  abcab  acabc  bcabc abcabc
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     a |     ()     ab     ac      b      c    abc    aca    acb     bc     ca     cb   abca   abcb   acab    bca    bcb    cab  abcab  acabc   bcab   cabc abcabc  bcabc
+     b |     ab     ()     bc      a    abc      c    bca    bcb     ac   abca   abcb     ca     cb   bcab    aca    acb  abcab    cab  bcabc   acab abcabc   cabc  acabc
+     c |     ca     cb     ()    cab    aca    bcb      a      b   cabc     ac   acab   bcab     bc     ab  bcabc  acabc    acb    bca    abc abcabc   abcb   abca  abcab
+    ab |      b      a    abc     ()     bc     ac   abca   abcb      c    bca    bcb    aca    acb  abcab     ca     cb   bcab   acab abcabc    cab  bcabc  acabc   cabc
+    ac |    aca    acb      a   acab     ca   abcb     ()     ab  acabc      c    cab  abcab    abc      b abcabc   cabc     cb   abca     bc  bcabc    bcb    bca   bcab
+    bc |    bca    bcb      b   bcab   abca     cb     ab     ()  bcabc    abc  abcab    cab      c      a   cabc abcabc   abcb     ca     ac  acabc    acb    aca   acab
+    ca |      c    cab    aca     cb     ()   cabc     ac   acab    bcb      a      b  bcabc  acabc    acb   bcab     bc     ab abcabc   abcb    bca    abc  abcab   abca
+    cb |    cab      c    bcb     ca   cabc     ()   bcab     bc    aca  bcabc  acabc      a      b    bca     ac   acab abcabc     ab   abca    acb  abcab    abc   abcb
+   abc |   abca   abcb     ab  abcab    bca    acb      b      a abcabc     bc   bcab   acab     ac     ()  acabc  bcabc    bcb    aca      c   cabc     cb     ca    cab
+   aca |     ac   acab     ca    acb      a  acabc      c    cab   abcb     ()     ab abcabc   cabc     cb  abcab    abc      b  bcabc    bcb   abca     bc   bcab    bca
+   acb |   acab     ac   abcb    aca  acabc      a  abcab    abc     ca abcabc   cabc     ()     ab   abca      c    cab  bcabc      b    bca     cb   bcab     bc    bcb
+   bca |     bc   bcab   abca    bcb      b  bcabc    abc  abcab     cb     ab     ()   cabc abcabc   abcb    cab      c      a  acabc    acb     ca     ac   acab    aca
+   bcb |   bcab     bc     cb    bca  bcabc      b    cab      c   abca   cabc abcabc     ab     ()     ca    abc  abcab  acabc      a    aca   abcb   acab     ac    acb
+   cab |     cb     ca   cabc      c    bcb    aca  bcabc  acabc     ()   bcab     bc     ac   acab abcabc      a      b    bca    acb  abcab     ab   abca   abcb    abc
+  abca |    abc  abcab    bca   abcb     ab abcabc     bc   bcab    acb      b      a  acabc  bcabc    bcb   acab     ac     ()   cabc     cb    aca      c    cab     ca
+  abcb |  abcab    abc    acb   abca abcabc     ab   acab     ac    bca  acabc  bcabc      b      a    aca     bc   bcab   cabc     ()     ca    bcb    cab      c     cb
+  acab |    acb    aca  acabc     ac   abcb     ca abcabc   cabc      a  abcab    abc      c    cab  bcabc     ()     ab   abca     cb   bcab      b    bca    bcb     bc
+  bcab |    bcb    bca  bcabc     bc     cb   abca   cabc abcabc      b    cab      c    abc  abcab  acabc     ab     ()     ca   abcb   acab      a    aca    acb     ac
+  cabc |  bcabc  acabc    cab abcabc   bcab   acab     cb     ca  abcab    bcb    bca    acb    aca      c   abcb   abca     bc     ac     ()    abc      b      a     ab
+ abcab |   abcb   abca abcabc    abc    acb    bca  acabc  bcabc     ab   acab     ac     bc   bcab   cabc      b      a    aca    bcb    cab     ()     ca     cb      c
+ acabc | abcabc   cabc   acab  bcabc  abcab    cab    acb    aca   bcab   abcb   abca     cb     ca     ac    bcb    bca    abc      c      a     bc     ab     ()      b
+ bcabc |   cabc abcabc   bcab  acabc    cab  abcab    bcb    bca   acab     cb     ca   abcb   abca     bc    acb    aca      c    abc      b     ac     ()     ab      a
+abcabc |  acabc  bcabc  abcab   cabc   acab   bcab   abcb   abca    cab    acb    aca    bcb    bca    abc     cb     ca     ac     bc     ab      c      a      b     ()
+
+Repr : ()
+    ()     => ( 0: 0) 
+    a2     => ( 1: 2) aa
+    b2     => ( 1: 2) bb
+    c2     => ( 1: 2) cc
+    a-2    => ( 1: 2) AA
+    b-2    => ( 1: 2) BB
+    c-2    => ( 1: 2) CC
+    abab   => ( 4: 4) abab
+    baba   => ( 4: 4) baba
+    acacac => ( 6: 6) acacac
+    bcbcbc => ( 6: 6) bcbcbc
+    cacaca => ( 6: 6) cacaca
+    cbcbcb => ( 6: 6) cbcbcb
+Repr : a
+    a     => ( 1: 1) a
+    a-1   => ( 1: 1) A
+    bab   => ( 3: 3) bab
+    cacac => ( 5: 5) cacac
+Repr : b
+    b     => ( 1: 1) b
+    b-1   => ( 1: 1) B
+    aba   => ( 3: 3) aba
+    cbcbc => ( 5: 5) cbcbc
+Repr : c
+    c     => ( 1: 1) c
+    c-1   => ( 1: 1) C
+    acaca => ( 5: 5) acaca
+    bcbcb => ( 5: 5) bcbcb
+Repr : ab
+    ab => ( 2: 2) ab
+    ba => ( 2: 2) ba
+Repr : ac
+    ac   => ( 2: 2) ac
+    caca => ( 4: 4) caca
+Repr : bc
+    bc   => ( 2: 2) bc
+    cbcb => ( 4: 4) cbcb
+Repr : ca
+    ca   => ( 2: 2) ca
+    acac => ( 4: 4) acac
+Repr : cb
+    cb   => ( 2: 2) cb
+    bcbc => ( 4: 4) bcbc
+Repr : abc
+    abc => ( 3: 3) abc
+Repr : aca
+    aca => ( 3: 3) aca
+    cac => ( 3: 3) cac
+Repr : acb
+    acb => ( 3: 3) acb
+Repr : bca
+    bca => ( 3: 3) bca
+Repr : bcb
+    bcb => ( 3: 3) bcb
+    cbc => ( 3: 3) cbc
+Repr : cab
+    cab => ( 3: 3) cab
+Repr : abca
+    abca => ( 4: 4) abca
+Repr : abcb
+    abcb => ( 4: 4) abcb
+Repr : acab
+    acab => ( 4: 4) acab
+Repr : bcab
+    bcab => ( 4: 4) bcab
+Repr : cabc
+    cabc   => ( 4: 4) cabc
+    acabcb => ( 6: 6) acabcb
+    bcabca => ( 6: 6) bcabca
+Repr : abcab
+    abcab => ( 5: 5) abcab
+Repr : acabc
+    acabc => ( 5: 5) acabc
+    cabcb => ( 5: 5) cabcb
+Repr : bcabc
+    bcabc => ( 5: 5) bcabc
+    cabca => ( 5: 5) cabca
+Repr : abcabc
+    abcabc => ( 6: 6) abcabc
+
+Total Words : 56
+Total Time  : 8971 ms; Total Created Words : 100839
 ```
