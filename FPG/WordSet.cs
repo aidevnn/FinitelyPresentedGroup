@@ -19,7 +19,7 @@ public class WordSet
     public void Display()
     {
         var digits = set.Max(w => w.ToString().Length);
-        Console.WriteLine($"Repr : {Key}");
+        Console.WriteLine($"Repr : {Key.extStr2}");
         foreach (var w in set.Ascending())
             Console.WriteLine($"    {w.Details(digits)}");
     }

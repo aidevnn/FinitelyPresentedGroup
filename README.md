@@ -18,12 +18,12 @@ Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
 will produce
 ```
 G = { (), a, b, ab, ba, aba }
-()  => ( 0: 0) 
-a   => ( 1: 1) a
-b   => ( 1: 1) b
-ab  => ( 2: 2) ab
-ba  => ( 2: 2) ba
-aba => ( 3: 3) aba
+()  => ()
+a   => a
+b   => b
+ab  => ab
+ba  => ba
+aba => aba
 
 Order = 6
 Is Group   : True
@@ -38,43 +38,41 @@ Is Abelian : False
 aba |  ab  ba   a   b  ()
 
 Repr : ()
-    ()     => ( 0: 0) 
-    a2     => ( 1: 2) aa
-    b2     => ( 1: 2) bb
-    a-2    => ( 1: 2) AA
-    b-2    => ( 1: 2) BB
-    ababab => ( 6: 6) ababab
-    bababa => ( 6: 6) bababa
+    ()     => ()
+    a2     => aa
+    b2     => bb
+    a-2    => AA
+    b-2    => BB
+    ababab => ababab
+    bababa => bababa
 Repr : a
-    a     => ( 1: 1) a
-    a-1   => ( 1: 1) A
-    babab => ( 5: 5) babab
+    a     => a
+    a-1   => A
+    babab => babab
 Repr : b
-    b     => ( 1: 1) b
-    b-1   => ( 1: 1) B
-    ababa => ( 5: 5) ababa
+    b     => b
+    b-1   => B
+    ababa => ababa
 Repr : ab
-    ab   => ( 2: 2) ab
-    baba => ( 4: 4) baba
+    ab   => ab
+    baba => baba
 Repr : ba
-    ba   => ( 2: 2) ba
-    abab => ( 4: 4) abab
+    ba   => ba
+    abab => abab
 Repr : aba
-    aba => ( 3: 3) aba
-    bab => ( 3: 3) bab
+    aba => aba
+    bab => bab
 
 Total Words : 19
-Total Time  : 203 ms; Total Created Words : 3256
+Total Time  : 198 ms; Total Created Words : 3256
 ```
 and
 ```
-
-
 G = { (), a, b, ab }
-() => ( 0: 0) 
-a  => ( 1: 1) a
-b  => ( 1: 1) b
-ab => ( 2: 2) ab
+() => ()
+a  => a
+b  => b
+ab => ab
 
 Order = 4
 Is Group   : True
@@ -87,37 +85,37 @@ Is Abelian : True
 ab |  b  a ()
 
 Repr : ()
-    ()   => ( 0: 0) 
-    a2   => ( 1: 2) aa
-    b2   => ( 1: 2) bb
-    a-2  => ( 1: 2) AA
-    b-2  => ( 1: 2) BB
-    abab => ( 4: 4) abab
-    baba => ( 4: 4) baba
+    ()   => ()
+    a2   => aa
+    b2   => bb
+    a-2  => AA
+    b-2  => BB
+    abab => abab
+    baba => baba
 Repr : a
-    a   => ( 1: 1) a
-    a-1 => ( 1: 1) A
-    bab => ( 3: 3) bab
+    a   => a
+    a-1 => A
+    bab => bab
 Repr : b
-    b   => ( 1: 1) b
-    b-1 => ( 1: 1) B
-    aba => ( 3: 3) aba
+    b   => b
+    b-1 => B
+    aba => aba
 Repr : ab
-    ab => ( 2: 2) ab
-    ba => ( 2: 2) ba
+    ab => ab
+    ba => ba
 
 Total Words : 15
-Total Time  : 54 ms; Total Created Words : 1813
+Total Time  : 58 ms; Total Created Words : 1813
 ```
 and
 ```
 G = { (), a, b, a-1, ab, ba-1 }
-()   => ( 0: 0) 
-a    => ( 1: 1) a
-b    => ( 1: 1) b
-a-1  => ( 1: 1) A
-ab   => ( 2: 2) ab
-ba-1 => ( 2: 2) bA
+()   => ()
+a    => a
+b    => b
+a-1  => A
+ab   => ab
+ba-1 => bA
 
 Order = 6
 Is Group   : True
@@ -132,49 +130,49 @@ ab | bA  a  b  A ()
 bA |  b  A ab ()  a
 
 Repr : ()
-    ()     => ( 0: 0) 
-    b2     => ( 1: 2) bb
-    b-2    => ( 1: 2) BB
-    a3     => ( 1: 3) aaa
-    a-3    => ( 1: 3) AAA
-    aba-1b => ( 4: 4) abAb
-    baba-1 => ( 4: 4) babA
-    ba-1ba => ( 4: 4) bAba
-    a-1bab => ( 4: 4) Abab
+    ()     => ()
+    b2     => bb
+    b-2    => BB
+    a3     => aaa
+    a-3    => AAA
+    aba-1b => abAb
+    baba-1 => babA
+    ba-1ba => bAba
+    a-1bab => Abab
 Repr : a
-    a   => ( 1: 1) a
-    a-2 => ( 1: 2) AA
-    bab => ( 3: 3) bab
+    a   => a
+    a-2 => AA
+    bab => bab
 Repr : b
-    b     => ( 1: 1) b
-    b-1   => ( 1: 1) B
-    aba-1 => ( 3: 3) abA
-    a-1ba => ( 3: 3) Aba
-Repr : a-1
-    a-1   => ( 1: 1) A
-    a2    => ( 1: 2) aa
-    ba-1b => ( 3: 3) bAb
+    b     => b
+    b-1   => B
+    aba-1 => abA
+    a-1ba => Aba
+Repr : A
+    a-1   => A
+    a2    => aa
+    ba-1b => bAb
 Repr : ab
-    ab => ( 2: 2) ab
-    ba => ( 2: 2) ba
-Repr : ba-1
-    ba-1 => ( 2: 2) bA
-    a-1b => ( 2: 2) Ab
+    ab => ab
+    ba => ba
+Repr : bA
+    ba-1 => bA
+    a-1b => Ab
 
 Total Words : 23
-Total Time  : 183 ms; Total Created Words : 3949
+Total Time  : 226 ms; Total Created Words : 3949
 ```
 and
 ```
 G = { (), a, b, a-1, b-1, a2, ab, ab-1 }
-()   => ( 0: 0) 
-a    => ( 1: 1) a
-b    => ( 1: 1) b
-a-1  => ( 1: 1) A
-b-1  => ( 1: 1) B
-a2   => ( 1: 2) aa
-ab   => ( 2: 2) ab
-ab-1 => ( 2: 2) aB
+()   => ()
+a    => a
+b    => b
+a-1  => A
+b-1  => B
+a2   => aa
+ab   => ab
+ab-1 => aB
 
 Order = 8
 Is Group   : True
@@ -191,90 +189,90 @@ ab |  b  A  B  a aB aa ()
 aB |  B  a  b  A ab () aa
 
 Repr : ()
-    ()         => ( 0: 0) 
-    a4         => ( 1: 4) aaaa
-    a-4        => ( 1: 4) AAAA
-    a2b2       => ( 2: 4) aabb
-    a2b-2      => ( 2: 4) aaBB
-    b2a2       => ( 2: 4) bbaa
-    b-2a2      => ( 2: 4) BBaa
-    ab-2a      => ( 3: 4) aBBa
-    ba2b       => ( 3: 4) baab
-    a-1b2a-1   => ( 3: 4) AbbA
-    b-1a2b-1   => ( 3: 4) BaaB
-    abab-1     => ( 4: 4) abaB
-    ab-1a-1b-1 => ( 4: 4) aBAB
-    baba-1     => ( 4: 4) babA
-    ba-1b-1a-1 => ( 4: 4) bABA
+    ()         => ()
+    a4         => aaaa
+    a-4        => AAAA
+    a2b2       => aabb
+    a2b-2      => aaBB
+    b2a2       => bbaa
+    b-2a2      => BBaa
+    ab-2a      => aBBa
+    ba2b       => baab
+    a-1b2a-1   => AbbA
+    b-1a2b-1   => BaaB
+    abab-1     => abaB
+    ab-1a-1b-1 => aBAB
+    baba-1     => babA
+    ba-1b-1a-1 => bABA
 Repr : a
-    a       => ( 1: 1) a
-    a-3     => ( 1: 3) AAA
-    a-1b2   => ( 2: 3) Abb
-    b2a-1   => ( 2: 3) bbA
-    ba-1b-1 => ( 3: 3) bAB
+    a       => a
+    a-3     => AAA
+    a-1b2   => Abb
+    b2a-1   => bbA
+    ba-1b-1 => bAB
 Repr : b
-    b       => ( 1: 1) b
-    b-3     => ( 1: 3) BBB
-    b-1a2   => ( 2: 3) Baa
-    a2b-1   => ( 2: 3) aaB
-    aba     => ( 3: 3) aba
-    ab-1a-1 => ( 3: 3) aBA
-Repr : a-1
-    a-1   => ( 1: 1) A
-    a3    => ( 1: 3) aaa
-    ab-2  => ( 2: 3) aBB
-    b-2a  => ( 2: 3) BBa
-    bab-1 => ( 3: 3) baB
-Repr : b-1
-    b-1       => ( 1: 1) B
-    b3        => ( 1: 3) bbb
-    ba2       => ( 2: 3) baa
-    a2b       => ( 2: 3) aab
-    aba-1     => ( 3: 3) abA
-    a-1b-1a-1 => ( 3: 3) ABA
-Repr : a2
-    a2  => ( 1: 2) aa
-    b2  => ( 1: 2) bb
-    a-2 => ( 1: 2) AA
-    b-2 => ( 1: 2) BB
+    b       => b
+    b-3     => BBB
+    b-1a2   => Baa
+    a2b-1   => aaB
+    aba     => aba
+    ab-1a-1 => aBA
+Repr : A
+    a-1   => A
+    a3    => aaa
+    ab-2  => aBB
+    b-2a  => BBa
+    bab-1 => baB
+Repr : B
+    b-1       => B
+    b3        => bbb
+    ba2       => baa
+    a2b       => aab
+    aba-1     => abA
+    a-1b-1a-1 => ABA
+Repr : aa
+    a2  => aa
+    b2  => bb
+    a-2 => AA
+    b-2 => BB
 Repr : ab
-    ab     => ( 2: 2) ab
-    ba-1   => ( 2: 2) bA
-    a-1b-1 => ( 2: 2) AB
-    b-1a   => ( 2: 2) Ba
-    b3a    => ( 2: 4) bbba
-    b-3a-1 => ( 2: 4) BBBA
-Repr : ab-1
-    ab-1   => ( 2: 2) aB
-    ba     => ( 2: 2) ba
-    a-1b   => ( 2: 2) Ab
-    b-1a-1 => ( 2: 2) BA
-    ab3    => ( 2: 4) abbb
+    ab     => ab
+    ba-1   => bA
+    a-1b-1 => AB
+    b-1a   => Ba
+    b3a    => bbba
+    b-3a-1 => BBBA
+Repr : aB
+    ab-1   => aB
+    ba     => ba
+    a-1b   => Ab
+    b-1a-1 => BA
+    ab3    => abbb
 
 Total Words : 52
-Total Time  : 3174 ms; Total Created Words : 36396
+Total Time  : 3415 ms; Total Created Words : 36396
 ```
 and
 ```
 G = { (), a, b, a-1, b-1, b2, b-2, b3, ab, ab-1, ba-1, a-1b-1, ab2, ab-2, a-1b2, a-1b-2, ab3, a-1b3 }
-()     => ( 0: 0) 
-a      => ( 1: 1) a
-b      => ( 1: 1) b
-a-1    => ( 1: 1) A
-b-1    => ( 1: 1) B
-b2     => ( 1: 2) bb
-b-2    => ( 1: 2) BB
-b3     => ( 1: 3) bbb
-ab     => ( 2: 2) ab
-ab-1   => ( 2: 2) aB
-ba-1   => ( 2: 2) bA
-a-1b-1 => ( 2: 2) AB
-ab2    => ( 2: 3) abb
-ab-2   => ( 2: 3) aBB
-a-1b2  => ( 2: 3) Abb
-a-1b-2 => ( 2: 3) ABB
-ab3    => ( 2: 4) abbb
-a-1b3  => ( 2: 4) Abbb
+()     => ()
+a      => a
+b      => b
+a-1    => A
+b-1    => B
+b2     => bb
+b-2    => BB
+b3     => bbb
+ab     => ab
+ab-1   => aB
+ba-1   => bA
+a-1b-1 => AB
+ab2    => abb
+ab-2   => aBB
+a-1b2  => Abb
+a-1b-2 => ABB
+ab3    => abbb
+a-1b3  => Abbb
 
 Order = 18
 Is Group   : True
@@ -301,119 +299,119 @@ abbb | Abbb  aBB  bbb  abb   aB   ab    a  ABB  Abb   BB   bb   AB   bA    B    
 Abbb |  bbb  ABB abbb  Abb   AB   bA    A   BB   bb  aBB  abb    B    b   aB   ab   ()    a
 
 Repr : ()
-    ()       => ( 0: 0) 
-    a3       => ( 1: 3) aaa
-    a-3      => ( 1: 3) AAA
-    b6       => ( 1: 6) bbbbbb
-    b-6      => ( 1: 6) BBBBBB
-    aba-1b-1 => ( 4: 4) abAB
-    ab-1a-1b => ( 4: 4) aBAb
-    bab-1a-1 => ( 4: 4) baBA
-    ba-1b-1a => ( 4: 4) bABa
-    a-1bab-1 => ( 4: 4) AbaB
-    a-1b-1ab => ( 4: 4) ABab
-    b-1aba-1 => ( 4: 4) BabA
-    b-1a-1ba => ( 4: 4) BAba
+    ()       => ()
+    a3       => aaa
+    a-3      => AAA
+    b6       => bbbbbb
+    b-6      => BBBBBB
+    aba-1b-1 => abAB
+    ab-1a-1b => aBAb
+    bab-1a-1 => baBA
+    ba-1b-1a => bABa
+    a-1bab-1 => AbaB
+    a-1b-1ab => ABab
+    b-1aba-1 => BabA
+    b-1a-1ba => BAba
 Repr : a
-    a     => ( 1: 1) a
-    a-2   => ( 1: 2) AA
-    bab-1 => ( 3: 3) baB
-    b-1ab => ( 3: 3) Bab
+    a     => a
+    a-2   => AA
+    bab-1 => baB
+    b-1ab => Bab
 Repr : b
-    b     => ( 1: 1) b
-    b-5   => ( 1: 5) BBBBB
-    aba-1 => ( 3: 3) abA
-    a-1ba => ( 3: 3) Aba
-Repr : a-1
-    a-1     => ( 1: 1) A
-    a2      => ( 1: 2) aa
-    ba-1b-1 => ( 3: 3) bAB
-    b-1a-1b => ( 3: 3) BAb
-Repr : b-1
-    b-1     => ( 1: 1) B
-    b5      => ( 1: 5) bbbbb
-    ab-1a-1 => ( 3: 3) aBA
-    a-1b-1a => ( 3: 3) ABa
-Repr : b2
-    b2     => ( 1: 2) bb
-    b-4    => ( 1: 4) BBBB
-    ab2a-1 => ( 3: 4) abbA
-    a-1b2a => ( 3: 4) Abba
-Repr : b-2
-    b-2     => ( 1: 2) BB
-    b4      => ( 1: 4) bbbb
-    ab-2a-1 => ( 3: 4) aBBA
-    a-1b-2a => ( 3: 4) ABBa
-Repr : b3
-    b3  => ( 1: 3) bbb
-    b-3 => ( 1: 3) BBB
+    b     => b
+    b-5   => BBBBB
+    aba-1 => abA
+    a-1ba => Aba
+Repr : A
+    a-1     => A
+    a2      => aa
+    ba-1b-1 => bAB
+    b-1a-1b => BAb
+Repr : B
+    b-1     => B
+    b5      => bbbbb
+    ab-1a-1 => aBA
+    a-1b-1a => ABa
+Repr : bb
+    b2     => bb
+    b-4    => BBBB
+    ab2a-1 => abbA
+    a-1b2a => Abba
+Repr : BB
+    b-2     => BB
+    b4      => bbbb
+    ab-2a-1 => aBBA
+    a-1b-2a => ABBa
+Repr : bbb
+    b3  => bbb
+    b-3 => BBB
 Repr : ab
-    ab => ( 2: 2) ab
-    ba => ( 2: 2) ba
-Repr : ab-1
-    ab-1 => ( 2: 2) aB
-    b-1a => ( 2: 2) Ba
-Repr : ba-1
-    ba-1 => ( 2: 2) bA
-    a-1b => ( 2: 2) Ab
-Repr : a-1b-1
-    a-1b-1 => ( 2: 2) AB
-    b-1a-1 => ( 2: 2) BA
-Repr : ab2
-    ab2      => ( 2: 3) abb
-    b2a      => ( 2: 3) bba
-    a-1b2a-1 => ( 3: 4) AbbA
-Repr : ab-2
-    ab-2      => ( 2: 3) aBB
-    b-2a      => ( 2: 3) BBa
-    a-1b-2a-1 => ( 3: 4) ABBA
-Repr : a-1b2
-    a-1b2 => ( 2: 3) Abb
-    b2a-1 => ( 2: 3) bbA
-    ab2a  => ( 3: 4) abba
-Repr : a-1b-2
-    a-1b-2 => ( 2: 3) ABB
-    b-2a-1 => ( 2: 3) BBA
-    ab-2a  => ( 3: 4) aBBa
-    ba-1b3 => ( 3: 5) bAbbb
-Repr : ab3
-    ab3 => ( 2: 4) abbb
-    b3a => ( 2: 4) bbba
-Repr : a-1b3
-    a-1b3  => ( 2: 4) Abbb
-    b3a-1  => ( 2: 4) bbbA
-    ba-1b2 => ( 3: 4) bAbb
+    ab => ab
+    ba => ba
+Repr : aB
+    ab-1 => aB
+    b-1a => Ba
+Repr : bA
+    ba-1 => bA
+    a-1b => Ab
+Repr : AB
+    a-1b-1 => AB
+    b-1a-1 => BA
+Repr : abb
+    ab2      => abb
+    b2a      => bba
+    a-1b2a-1 => AbbA
+Repr : aBB
+    ab-2      => aBB
+    b-2a      => BBa
+    a-1b-2a-1 => ABBA
+Repr : Abb
+    a-1b2 => Abb
+    b2a-1 => bbA
+    ab2a  => abba
+Repr : ABB
+    a-1b-2 => ABB
+    b-2a-1 => BBA
+    ab-2a  => aBBa
+    ba-1b3 => bAbbb
+Repr : abbb
+    ab3 => abbb
+    b3a => bbba
+Repr : Abbb
+    a-1b3  => Abbb
+    b3a-1  => bbbA
+    ba-1b2 => bAbb
 
 Total Words : 65
-Total Time  : 4666 ms; Total Created Words : 44573
+Total Time  : 4799 ms; Total Created Words : 44573
 ```
 and
 ```
 G = { (), a, b, c, ab, ac, bc, ca, cb, abc, aca, acb, bca, bcb, cab, abca, abcb, acab, bcab, cabc, abcab, acabc, bcabc, abcabc }
-()     => ( 0: 0) 
-a      => ( 1: 1) a
-b      => ( 1: 1) b
-c      => ( 1: 1) c
-ab     => ( 2: 2) ab
-ac     => ( 2: 2) ac
-bc     => ( 2: 2) bc
-ca     => ( 2: 2) ca
-cb     => ( 2: 2) cb
-abc    => ( 3: 3) abc
-aca    => ( 3: 3) aca
-acb    => ( 3: 3) acb
-bca    => ( 3: 3) bca
-bcb    => ( 3: 3) bcb
-cab    => ( 3: 3) cab
-abca   => ( 4: 4) abca
-abcb   => ( 4: 4) abcb
-acab   => ( 4: 4) acab
-bcab   => ( 4: 4) bcab
-cabc   => ( 4: 4) cabc
-abcab  => ( 5: 5) abcab
-acabc  => ( 5: 5) acabc
-bcabc  => ( 5: 5) bcabc
-abcabc => ( 6: 6) abcabc
+()     => ()
+a      => a
+b      => b
+c      => c
+ab     => ab
+ac     => ac
+bc     => bc
+ca     => ca
+cb     => cb
+abc    => abc
+aca    => aca
+acb    => acb
+bca    => bca
+bcb    => bcb
+cab    => cab
+abca   => abca
+abcb   => abcb
+acab   => acab
+bcab   => bcab
+cabc   => cabc
+abcab  => abcab
+acabc  => acabc
+bcabc  => bcabc
+abcabc => abcabc
 
 Order = 24
 Is Group   : True
@@ -446,86 +444,86 @@ Is Abelian : False
 abcabc |  acabc  bcabc  abcab   cabc   acab   bcab   abcb   abca    cab    acb    aca    bcb    bca    abc     cb     ca     ac     bc     ab      c      a      b     ()
 
 Repr : ()
-    ()     => ( 0: 0) 
-    a2     => ( 1: 2) aa
-    b2     => ( 1: 2) bb
-    c2     => ( 1: 2) cc
-    a-2    => ( 1: 2) AA
-    b-2    => ( 1: 2) BB
-    c-2    => ( 1: 2) CC
-    abab   => ( 4: 4) abab
-    baba   => ( 4: 4) baba
-    acacac => ( 6: 6) acacac
-    bcbcbc => ( 6: 6) bcbcbc
-    cacaca => ( 6: 6) cacaca
-    cbcbcb => ( 6: 6) cbcbcb
+    ()     => ()
+    a2     => aa
+    b2     => bb
+    c2     => cc
+    a-2    => AA
+    b-2    => BB
+    c-2    => CC
+    abab   => abab
+    baba   => baba
+    acacac => acacac
+    bcbcbc => bcbcbc
+    cacaca => cacaca
+    cbcbcb => cbcbcb
 Repr : a
-    a     => ( 1: 1) a
-    a-1   => ( 1: 1) A
-    bab   => ( 3: 3) bab
-    cacac => ( 5: 5) cacac
+    a     => a
+    a-1   => A
+    bab   => bab
+    cacac => cacac
 Repr : b
-    b     => ( 1: 1) b
-    b-1   => ( 1: 1) B
-    aba   => ( 3: 3) aba
-    cbcbc => ( 5: 5) cbcbc
+    b     => b
+    b-1   => B
+    aba   => aba
+    cbcbc => cbcbc
 Repr : c
-    c     => ( 1: 1) c
-    c-1   => ( 1: 1) C
-    acaca => ( 5: 5) acaca
-    bcbcb => ( 5: 5) bcbcb
+    c     => c
+    c-1   => C
+    acaca => acaca
+    bcbcb => bcbcb
 Repr : ab
-    ab => ( 2: 2) ab
-    ba => ( 2: 2) ba
+    ab => ab
+    ba => ba
 Repr : ac
-    ac   => ( 2: 2) ac
-    caca => ( 4: 4) caca
+    ac   => ac
+    caca => caca
 Repr : bc
-    bc   => ( 2: 2) bc
-    cbcb => ( 4: 4) cbcb
+    bc   => bc
+    cbcb => cbcb
 Repr : ca
-    ca   => ( 2: 2) ca
-    acac => ( 4: 4) acac
+    ca   => ca
+    acac => acac
 Repr : cb
-    cb   => ( 2: 2) cb
-    bcbc => ( 4: 4) bcbc
+    cb   => cb
+    bcbc => bcbc
 Repr : abc
-    abc => ( 3: 3) abc
+    abc => abc
 Repr : aca
-    aca => ( 3: 3) aca
-    cac => ( 3: 3) cac
+    aca => aca
+    cac => cac
 Repr : acb
-    acb => ( 3: 3) acb
+    acb => acb
 Repr : bca
-    bca => ( 3: 3) bca
+    bca => bca
 Repr : bcb
-    bcb => ( 3: 3) bcb
-    cbc => ( 3: 3) cbc
+    bcb => bcb
+    cbc => cbc
 Repr : cab
-    cab => ( 3: 3) cab
+    cab => cab
 Repr : abca
-    abca => ( 4: 4) abca
+    abca => abca
 Repr : abcb
-    abcb => ( 4: 4) abcb
+    abcb => abcb
 Repr : acab
-    acab => ( 4: 4) acab
+    acab => acab
 Repr : bcab
-    bcab => ( 4: 4) bcab
+    bcab => bcab
 Repr : cabc
-    cabc   => ( 4: 4) cabc
-    acabcb => ( 6: 6) acabcb
-    bcabca => ( 6: 6) bcabca
+    cabc   => cabc
+    acabcb => acabcb
+    bcabca => bcabca
 Repr : abcab
-    abcab => ( 5: 5) abcab
+    abcab => abcab
 Repr : acabc
-    acabc => ( 5: 5) acabc
-    cabcb => ( 5: 5) cabcb
+    acabc => acabc
+    cabcb => cabcb
 Repr : bcabc
-    bcabc => ( 5: 5) bcabc
-    cabca => ( 5: 5) cabca
+    bcabc => bcabc
+    cabca => cabca
 Repr : abcabc
-    abcabc => ( 6: 6) abcabc
+    abcabc => abcabc
 
 Total Words : 56
-Total Time  : 8971 ms; Total Created Words : 100839
+Total Time  : 8836 ms; Total Created Words : 100839
 ```

@@ -52,7 +52,7 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
 
     public string Details(int digits = 2)
     {
-        var fmt = $"{{0,-{digits}}} => ({length,2}:{weight,2}) {extStr}";
+        var fmt = $"{{0,-{digits}}} => {extStr2}";
         return string.Format(fmt, this);
     }
 
