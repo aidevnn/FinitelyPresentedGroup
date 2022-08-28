@@ -4,6 +4,7 @@ using System.Diagnostics;
 void Generate(params string[] relations)
 {
     var sw = Stopwatch.StartNew();
+    WordStructureExt.count = 0;
     if (relations.Length == 0) return;
     var nbGens = relations.SelectMany(r => r).Where(c => char.IsLetter(c)).Select(c => char.ToLower(c)).Distinct().Count();
     if (nbGens > relations.Count()) return;
@@ -29,7 +30,7 @@ void Generate(params string[] relations)
     Console.WriteLine();
 
     wstr.Display();
-    Console.WriteLine($"Total Time  : {sw.ElapsedMilliseconds} ms");
+    Console.WriteLine($"Total Time  : {sw.ElapsedMilliseconds} ms; Total Created Words : {WordStructureExt.count}");
 }
 
 // Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
@@ -40,18 +41,16 @@ void Generate(params string[] relations)
 
 // Generate("a6"); // C6
 
-Generate("a2", "b2", "ababab"); // S3
+// Generate("a2", "b2", "ababab"); // S3
 
 // Generate("a2", "b2", "c2", "aba = c", "ababab"); // S3
 
-// Generate("a2", "b2", "c3", "ab = c"); // S3
+Generate("a2", "b2", "ababab"); // S3
 
-// Generate("a2", "b2", "abab"); // Klein
+Generate("a2", "b2", "abab"); // Klein
 
-// Generate("a6"); // C6
+Generate("a3", "b2", "aba-1b-1"); // C6
 
-// Generate("a3", "b2", "aba-1b-1"); // C6
+Generate("a4", "a2b-2", "b-1aba"); // H8
 
-// Generate("a4", "a2b-2", "b-1aba"); // H8
-
-// Generate("a3", "b6", "ab = ba"); // C3 x C6 
+Generate("a3", "b6", "ab = ba"); // C3 x C6 

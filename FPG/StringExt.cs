@@ -13,7 +13,7 @@ public static class StringExt
 
     public static string Reduce(this string word)
     {
-        Stack<char> stack = new Stack<char>();
+        Stack<char> stack = new Stack<char>(30);
         foreach (var c in word)
         {
             if (stack.Count == 0)
@@ -27,7 +27,7 @@ public static class StringExt
                 stack.Push(c);
         }
 
-        return string.Join("", stack.Reverse());
+        return new String(stack.Reverse().ToArray());
     }
 
     public static string Reduce(this string word, string pattern, string substitute)
@@ -36,7 +36,7 @@ public static class StringExt
         while (true)
         {
             int sz0 = nword.Length;
-            nword = nword.Replace(pattern, substitute);
+            nword = nword.Replace(pattern, substitute).Reduce();
             int sz1 = nword.Length;
             if (sz0 == sz1)
                 break;

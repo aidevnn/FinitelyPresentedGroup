@@ -3,28 +3,30 @@ namespace FPG;
 
 public static class WordStructureExt
 {
+    public static int count = 0;
     public static Word RewriteWord(this WordStructure wstr, Word w)
     {
         var wi = w;
         int s0 = 0;
         var pairs = wstr.Pairs;
-        HashSet<Word> ws0 = new(pairs.Count());
+
+        HashSet<string> set = new(pairs.Count());
         do
         {
             s0 = wi.GetHashCode();
-            foreach (var ws1 in pairs)
+            set.Add(wi.extStr);
+            foreach (var kv in pairs)
             {
-                var substitute = ws1.key;
-                var pattern = ws1.value;
+                var substitute = kv.key;
+                var pattern = kv.value;
                 if (pattern.Equals(substitute)) continue;
                 var w0 = wi.extStr.Reduce(pattern.extStr, substitute.extStr);
-                ws0.Add(new Word(w0));
+                set.Add(w0);
             }
 
-            var wf = ws0.Min();
-            ws0.Clear();
-            wi = wf;
-        } while ((s0 != wi.GetHashCode()));
+            wi = set.Select(w => new Word(w)).Min();
+            set.Clear();
+        } while (s0 != wi.GetHashCode());
 
         return wi;
     }
@@ -56,11 +58,11 @@ public static class WordStructureExt
             foreach (var w1 in ws1.Content)
             {
                 var w2 = new Word(wi0.extStr + w1.extStr);
-                ws2.Add(wstr.RewriteWord(w2));
+                ws2.Add(w2);
             }
         }
 
-        return new(ws2);
+        return new(ws2.Select(w => wstr.RewriteWord(w)));
     }
 
     public static WordStructure Develop(this WordStructure wstr)
@@ -76,7 +78,7 @@ public static class WordStructureExt
         foreach (var ws in sets)
             wstr0 = new WordStructure(ws, wstr0);
 
-        Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms");
+        // Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms");
         return wstr0;
     }
     public static void IsGroup(this WordStructure wordStructure)

@@ -1,8 +1,5 @@
 # FinitelyPresentedGroup
 Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very very slow even for smallest groups.
-
-(In Progress)
-
 ``` 
 Generate("a2", "b2", "ababab"); // S3
 
@@ -65,12 +62,14 @@ Repr : aba
     bab => ( 3: 3) bab
 
 Total Words : 19
-Total Time  : 389 ms
+Total Time  : 203 ms; Total Created Words : 3256
 ```
 and
 ```
+
+
 G = { (), a, b, ab }
-() => ( 0: 0)
+() => ( 0: 0) 
 a  => ( 1: 1) a
 b  => ( 1: 1) b
 ab => ( 2: 2) ab
@@ -86,7 +85,7 @@ Is Abelian : True
 ab |  b  a ()
 
 Repr : ()
-    ()   => ( 0: 0)
+    ()   => ( 0: 0) 
     a2   => ( 1: 2) aa
     b2   => ( 1: 2) bb
     a-2  => ( 1: 2) AA
@@ -106,12 +105,12 @@ Repr : ab
     ba => ( 2: 2) ba
 
 Total Words : 15
-Total Time  : 175 ms
+Total Time  : 54 ms; Total Created Words : 1813
 ```
 and
 ```
 G = { (), a, b, a-1, ab, ba-1 }
-()   => ( 0: 0)
+()   => ( 0: 0) 
 a    => ( 1: 1) a
 b    => ( 1: 1) b
 a-1  => ( 1: 1) A
@@ -131,7 +130,7 @@ ab | bA  a  b  A ()
 bA |  b  A ab ()  a
 
 Repr : ()
-    ()     => ( 0: 0)
+    ()     => ( 0: 0) 
     b2     => ( 1: 2) bb
     b-2    => ( 1: 2) BB
     a3     => ( 1: 3) aaa
@@ -161,13 +160,12 @@ Repr : ba-1
     a-1b => ( 2: 2) Ab
 
 Total Words : 23
-Total Time  : 446 ms
+Total Time  : 183 ms; Total Created Words : 3949
 ```
 and
 ```
-
 G = { (), a, b, a-1, b-1, a2, ab, ab-1 }
-()   => ( 0: 0)
+()   => ( 0: 0) 
 a    => ( 1: 1) a
 b    => ( 1: 1) b
 a-1  => ( 1: 1) A
@@ -191,7 +189,7 @@ ab |  b  A  B  a aB aa ()
 aB |  B  a  b  A ab () aa
 
 Repr : ()
-    ()         => ( 0: 0)
+    ()         => ( 0: 0) 
     a4         => ( 1: 4) aaaa
     a-4        => ( 1: 4) AAAA
     a2b2       => ( 2: 4) aabb
@@ -252,13 +250,12 @@ Repr : ab-1
     ab3    => ( 2: 4) abbb
 
 Total Words : 52
-Total Time  : 7296 ms
+Total Time  : 3174 ms; Total Created Words : 36396
 ```
 and
 ```
-
 G = { (), a, b, a-1, b-1, b2, b-2, b3, ab, ab-1, ba-1, a-1b-1, ab2, ab-2, a-1b2, a-1b-2, ab3, a-1b3 }
-()     => ( 0: 0)
+()     => ( 0: 0) 
 a      => ( 1: 1) a
 b      => ( 1: 1) b
 a-1    => ( 1: 1) A
@@ -302,7 +299,7 @@ abbb | Abbb  aBB  bbb  abb   aB   ab    a  ABB  Abb   BB   bb   AB   bA    B    
 Abbb |  bbb  ABB abbb  Abb   AB   bA    A   BB   bb  aBB  abb    B    b   aB   ab   ()    a
 
 Repr : ()
-    ()       => ( 0: 0)
+    ()       => ( 0: 0) 
     a3       => ( 1: 3) aaa
     a-3      => ( 1: 3) AAA
     b6       => ( 1: 6) bbbbbb
@@ -386,5 +383,5 @@ Repr : a-1b3
     ba-1b2 => ( 3: 4) bAbb
 
 Total Words : 65
-Total Time  : 10388 ms
+Total Time  : 4666 ms; Total Created Words : 44573
 ```

@@ -17,14 +17,15 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
         letters = word.ToLetters();
         length = letters.Count();
         weight = letters.Sum(l => l.weight);
-        extStr = letters.SelectMany(l => l.Extend()).JoinChars();
+        extStr = new String(letters.SelectMany(l => l.Extend()).ToArray());
+        ++WordStructureExt.count;
     }
     private Word(Word w)
     {
         letters = w.Select(l => l.Invert()).Reverse();
         length = w.length;
         weight = w.weight;
-        extStr = letters.SelectMany(l => l.Extend()).JoinChars();
+        extStr = new String(letters.SelectMany(l => l.Extend()).ToArray());
     }
     public Word Invert() => new Word(this);
     public int length { get; }
