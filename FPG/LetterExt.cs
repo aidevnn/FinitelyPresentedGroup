@@ -34,6 +34,4 @@ public static class LetterExt
 
         return letters.Reduce();
     }
-    public static Word ToWord(this string word) => new Word(word);
-    public static string ToExtStrWord(this string word) => new Word(word).extStr;
 }

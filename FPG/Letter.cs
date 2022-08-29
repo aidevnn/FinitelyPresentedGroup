@@ -35,18 +35,6 @@ public struct Letter : IEquatable<Letter>, IComparable<Letter>
 
         return c.CompareTo(other.c);
     }
-    // public int CompareTo(Letter other)
-    // {
-    //     var compW = weight.CompareTo(other.weight);
-    //     if (compW != 0)
-    //         return compW;
-
-    //     var compC = c.CompareTo(other.c);
-    //     if (compC != 0)
-    //         return compC;
-
-    //     return -sgn.CompareTo(other.sgn);
-    // }
 
     public static implicit operator Letter((char c, int p) e) => new Letter(e.c, e.p);
     public static implicit operator Letter(char c) => char.IsLower(c) ? (c, 1) : (char.ToLower(c), -1);

@@ -1,7 +1,15 @@
+using System.Text.RegularExpressions;
 namespace FPG;
 
 public static class StringExt
 {
+    static Regex ReduceRgx { get; }
+    static StringExt()
+    {
+        var alph = "abcdefghijkl";
+        var pattern = alph.Select(c => (c, char.ToUpper(c))).Select(t => $"{t.c}{t.Item2}|{t.Item2}{t.c}").Glue("|");
+        ReduceRgx = new Regex(pattern);
+    }
     public static string JoinChars(this IEnumerable<char> cs) => string.Join("", cs);
     public static bool AreInvert(char c0, char c1)
     {
@@ -30,33 +38,17 @@ public static class StringExt
         return new String(stack.Reverse().ToArray());
     }
 
-    public static string Reduce(this string word, string pattern, string substitute)
-    {
-        var nword = word;
-        while (true)
-        {
-            int sz0 = nword.Length;
-            nword = nword.Replace(pattern, substitute).Reduce();
-            int sz1 = nword.Length;
-            if (sz0 == sz1)
-                break;
-        }
+    // public static string Reduce(this string word)
+    // {
+    //     int sz = 0;
+    //     while (word.Length != sz)
+    //     {
+    //         sz = word.Length;
+    //         word = ReduceRgx.Replace(word, "");
+    //     }
 
-        return nword;
-    }
-
-    public static string Reduce(this string word, string pattern) => word.Reduce(pattern, "");
-
-    static IComparer<string> StrComp = Comparer<string>.Create((s0, s1) =>
-    {
-        var compL = s0.Length.CompareTo(s1.Length);
-        if (compL != 0)
-            return compL;
-
-        return s0.CompareTo(s1);
-    });
-
-    public static int StrComparison(this string s0, string s1) => StrComp.Compare(s0, s1);
+    //     return word;
+    // }
 
 }
 

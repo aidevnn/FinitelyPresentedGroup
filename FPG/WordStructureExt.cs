@@ -4,37 +4,11 @@ namespace FPG;
 public static class WordStructureExt
 {
     public static int count = 0;
-    public static Word RewriteWord(this WordStructure wstr, Word w)
-    {
-        var wi = w;
-        int s0 = 0;
-        var pairs = wstr.Pairs;
-
-        HashSet<string> set = new(pairs.Count());
-        do
-        {
-            s0 = wi.GetHashCode();
-            set.Add(wi.extStr);
-            foreach (var kv in pairs)
-            {
-                var substitute = kv.key;
-                var pattern = kv.value;
-                if (pattern.Equals(substitute)) continue;
-                var w0 = wi.extStr.Reduce(pattern.extStr, substitute.extStr);
-                set.Add(w0);
-            }
-
-            wi = set.Select(w => new Word(w)).Min();
-            set.Clear();
-        } while (s0 != wi.GetHashCode());
-
-        return wi;
-    }
     public static WordSet RewriteSet(this WordStructure wstr, WordSet ws)
     {
         HashSet<Word> ws0 = new();
         foreach (var w in ws.Content)
-            ws0.Add(wstr.RewriteWord(w));
+            ws0.Add(wstr.ReduceWord(w));
 
         return new(ws0);
     }
@@ -62,7 +36,7 @@ public static class WordStructureExt
             }
         }
 
-        return new(ws2.Select(w => wstr.RewriteWord(w)));
+        return new(ws2.Select(w => wstr.ReduceWord(w)));
     }
 
     public static WordStructure Develop(this WordStructure wstr)
@@ -81,6 +55,19 @@ public static class WordStructureExt
         // Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms");
         return wstr0;
     }
+
+    public static WordStructure LoopDevelop(this WordStructure wstr0, int loopMax = 5)
+    {
+        var wstr = new WordStructure(wstr0);
+        for (int k = 0; k < loopMax; ++k)
+        {
+            int sz0 = wstr.Count;
+            wstr = wstr.Develop();
+            if (sz0 == wstr.Count)
+                break;
+        }
+        return wstr;
+    }
     public static void IsGroup(this WordStructure wordStructure)
     {
         var keys = wordStructure.WSets().Select(ws => ws.Key).Ascending().ToHashSet();
@@ -90,10 +77,10 @@ public static class WordStructureExt
             var ei0 = e0.Invert();
             foreach (var e1 in keys)
             {
-                var e2 = wordStructure.RewriteWord(new Word(ei0.extStr + e1.extStr));
+                var e2 = wordStructure.ReduceWord(new Word(ei0.extStr + e1.extStr));
                 if (isComm)
                 {
-                    var e3 = wordStructure.RewriteWord(new Word(e1.extStr + ei0.extStr));
+                    var e3 = wordStructure.ReduceWord(new Word(e1.extStr + ei0.extStr));
                     isComm &= e2.Equals(e3);
                 }
 
@@ -133,12 +120,29 @@ public static class WordStructureExt
             foreach (var w1 in keys.Skip(1))
             {
                 var w2 = new Word(w0.extStr + w1.extStr);
-                var w3 = wordStructure.RewriteWord(w2);
+                var w3 = wordStructure.ReduceWord(w2);
                 row.Add(w3);
             }
 
             var rowStr = string.Format("{0} | {1}", string.Format(fmt, w0.extStr2), row.Select(w => w.extStr2).Glue(" ", fmt));
             Console.WriteLine(rowStr);
         }
+    }
+
+    public static WordStructure MergeRelation(params string[] relations)
+    {
+        if (relations.Length == 0)
+            return new WordStructure();
+
+        var nbGens = relations.SelectMany(r => r).Where(c => char.IsLetter(c)).Select(c => char.ToLower(c)).Distinct().Count();
+        if (nbGens > relations.Count())
+            return new WordStructure();
+
+        Queue<string> rels = new(relations);
+        var wstr = Relation.Structure(rels.Dequeue());
+        while (rels.Count != 0)
+            wstr = wstr.RewriteStruct(Relation.Structure(rels.Dequeue()));
+
+        return wstr;
     }
 }

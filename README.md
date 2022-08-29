@@ -1,11 +1,11 @@
 # FinitelyPresentedGroup
 Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very very slow even for smallest groups.
 ``` 
-Generate("a2", "b2", "ababab"); // S3
-
 Generate("a2", "b2", "abab"); // Klein
 
 Generate("a3", "b2", "aba-1b-1"); // C6
+
+Generate("a2", "b2", "ababab"); // S3
 
 Generate("a4", "a2b-2", "b-1aba"); // H8
 
@@ -16,57 +16,6 @@ Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
 ```
 
 will produce
-```
-G = { (), a, b, ab, ba, aba }
-()  => ()
-a   => a
-b   => b
-ab  => ab
-ba  => ba
-aba => aba
-
-Order = 6
-Is Group   : True
-Is Abelian : False
-
- () |   a   b  ab  ba aba
--------------------------
-  a |  ()  ab   b aba  ba
-  b |  ba  () aba   a  ab
- ab | aba   a  ba  ()   b
- ba |   b aba  ()  ab   a
-aba |  ab  ba   a   b  ()
-
-Repr : ()
-    ()     => ()
-    a2     => aa
-    b2     => bb
-    a-2    => AA
-    b-2    => BB
-    ababab => ababab
-    bababa => bababa
-Repr : a
-    a     => a
-    a-1   => A
-    babab => babab
-Repr : b
-    b     => b
-    b-1   => B
-    ababa => ababa
-Repr : ab
-    ab   => ab
-    baba => baba
-Repr : ba
-    ba   => ba
-    abab => abab
-Repr : aba
-    aba => aba
-    bab => bab
-
-Total Words : 19
-Total Time  : 198 ms; Total Created Words : 3256
-```
-and
 ```
 G = { (), a, b, ab }
 () => ()
@@ -105,7 +54,7 @@ Repr : ab
     ba => ba
 
 Total Words : 15
-Total Time  : 58 ms; Total Created Words : 1813
+Total Time  : 29 ms; Total Created Words : 1768
 ```
 and
 ```
@@ -160,7 +109,58 @@ Repr : bA
     a-1b => Ab
 
 Total Words : 23
-Total Time  : 226 ms; Total Created Words : 3949
+Total Time  : 64 ms; Total Created Words : 3862
+```
+and
+```
+G = { (), a, b, ab, ba, aba }
+()  => ()
+a   => a
+b   => b
+ab  => ab
+ba  => ba
+aba => aba
+
+Order = 6
+Is Group   : True
+Is Abelian : False
+
+ () |   a   b  ab  ba aba
+-------------------------
+  a |  ()  ab   b aba  ba
+  b |  ba  () aba   a  ab
+ ab | aba   a  ba  ()   b
+ ba |   b aba  ()  ab   a
+aba |  ab  ba   a   b  ()
+
+Repr : ()
+    ()     => ()
+    a2     => aa
+    b2     => bb
+    a-2    => AA
+    b-2    => BB
+    ababab => ababab
+    bababa => bababa
+Repr : a
+    a     => a
+    a-1   => A
+    babab => babab
+Repr : b
+    b     => b
+    b-1   => B
+    ababa => ababa
+Repr : ab
+    ab   => ab
+    baba => baba
+Repr : ba
+    ba   => ba
+    abab => abab
+Repr : aba
+    aba => aba
+    bab => bab
+
+Total Words : 19
+Total Time  : 186 ms; Total Created Words : 3180
 ```
 and
 ```
@@ -250,7 +250,7 @@ Repr : aB
     ab3    => abbb
 
 Total Words : 52
-Total Time  : 3415 ms; Total Created Words : 36396
+Total Time  : 565 ms; Total Created Words : 34430
 ```
 and
 ```
@@ -383,7 +383,7 @@ Repr : Abbb
     ba-1b2 => bAbb
 
 Total Words : 65
-Total Time  : 4799 ms; Total Created Words : 44573
+Total Time  : 839 ms; Total Created Words : 44174
 ```
 and
 ```
@@ -525,5 +525,5 @@ Repr : abcabc
     abcabc => abcabc
 
 Total Words : 56
-Total Time  : 8836 ms; Total Created Words : 100839
+Total Time  : 2049 ms; Total Created Words : 97783
 ```
