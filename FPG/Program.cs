@@ -32,6 +32,8 @@ WordStructure Generate(params string[] relations)
 
 Generate("a2", "b2", "abab"); // Klein
 
+Generate("a2", "b2", "abab"); // Klein
+
 Generate("a3", "b2", "aba-1b-1"); // C6
 
 Generate("a2", "b2", "ababab"); // S3

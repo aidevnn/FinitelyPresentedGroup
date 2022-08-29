@@ -160,7 +160,7 @@ Repr : aba
     bab => bab
 
 Total Words : 19
-Total Time  : 186 ms; Total Created Words : 3180
+Total Time  : 60 ms; Total Created Words : 3180
 ```
 and
 ```
