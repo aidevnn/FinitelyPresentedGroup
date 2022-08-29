@@ -12,6 +12,25 @@ public static class WordStructureExt
 
         return new(ws0);
     }
+    public static WordSet RewriteSelfSet(this WordStructure wstr, WordSet ws)
+    {
+        HashSet<Word> ws0 = new(ws);
+        foreach (var w in ws)
+            ws0.Add(wstr.ReduceWord(w));
+
+        return new(ws0);
+    }
+    public static WordStructure RewriteSelf(this WordStructure wstr)
+    {
+        var wstr0 = new WordStructure();
+        foreach (var ws in wstr)
+        {
+            var ws0 = wstr.RewriteSelfSet(ws);
+            wstr0 = new WordStructure(ws0, wstr0);
+        }
+
+        return wstr0;
+    }
     public static WordStructure RewriteStruct(this WordStructure wstr, WordStructure other)
     {
         var wstr0 = new WordStructure(wstr);
@@ -38,10 +57,8 @@ public static class WordStructureExt
 
         return new(ws2.Select(w => wstr.ReduceWord(w)));
     }
-
-    public static WordStructure Develop(this WordStructure wstr)
+    public static WordStructure DevelopProduct(this WordStructure wstr)
     {
-        var sw = Stopwatch.StartNew();
         var wstr0 = new WordStructure(wstr);
         List<WordSet> sets = new();
         foreach (var ws0 in wstr)
@@ -51,7 +68,6 @@ public static class WordStructureExt
         foreach (var ws in sets)
             wstr0 = new WordStructure(ws, wstr0);
 
-        // Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms; Words : {wstr0.TotalWords}");
         return wstr0;
     }
 
@@ -61,11 +77,11 @@ public static class WordStructureExt
         for (int k = 0; k < loopMax; ++k)
         {
             int sz0 = wstr.TotalWords;
-            wstr = wstr.Develop();
+            wstr = wstr.DevelopProduct();
             if (sz0 == wstr.TotalWords)
                 break;
         }
-        return wstr;
+        return wstr.RewriteSelf();
     }
     public static void IsGroup(this WordStructure wordStructure)
     {
@@ -127,7 +143,6 @@ public static class WordStructureExt
             Console.WriteLine(rowStr);
         }
     }
-
     public static WordStructure MergeRelation(params string[] relations)
     {
         if (relations.Length == 0)

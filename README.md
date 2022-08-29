@@ -56,7 +56,7 @@ Repr : ab
     ba => ba
 
 Total Words : 15
-Total Time  : 29 ms; Total Created Words : 1768
+Total Time  : 29 ms; Total Created Words : 1867
 ```
 and
 ```
@@ -111,7 +111,7 @@ Repr : bA
     a-1b => Ab
 
 Total Words : 23
-Total Time  : 64 ms; Total Created Words : 3862
+Total Time  : 71 ms; Total Created Words : 4001
 ```
 and
 ```
@@ -162,7 +162,7 @@ Repr : aba
     bab => bab
 
 Total Words : 19
-Total Time  : 60 ms; Total Created Words : 3180
+Total Time  : 66 ms; Total Created Words : 3315
 ```
 and
 ```
@@ -252,7 +252,7 @@ Repr : aB
     ab3    => abbb
 
 Total Words : 52
-Total Time  : 565 ms; Total Created Words : 34430
+Total Time  : 573 ms; Total Created Words : 34791
 ```
 and
 ```
@@ -385,7 +385,7 @@ Repr : Abbb
     ba-1b2 => bAbb
 
 Total Words : 65
-Total Time  : 839 ms; Total Created Words : 44174
+Total Time  : 828 ms; Total Created Words : 44555
 ```
 and
 ```
@@ -527,5 +527,5 @@ Repr : abcabc
     abcabc => abcabc
 
 Total Words : 56
-Total Time  : 2049 ms; Total Created Words : 97783
+Total Time  : 2079 ms; Total Created Words : 98126
 ```

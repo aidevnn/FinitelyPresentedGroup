@@ -16,7 +16,7 @@ public class WordGroup
 
     WordStructure Structure { get; }
 
-    public static void Generate(params string[] relations)
+    public static WordStructure Generate(params string[] relations)
     {
         var sw = Stopwatch.StartNew();
         WordStructureExt.count = 0;
@@ -30,5 +30,6 @@ public class WordGroup
 
         wg.Structure.Display();
         Console.WriteLine($"Total Time  : {sw.ElapsedMilliseconds} ms; Total Created Words : {WordStructureExt.count}");
+        return wg.Structure;
     }
 }
