@@ -52,7 +52,7 @@ public static class WordStructureExt
         foreach (var ws in sets)
             wstr0 = new WordStructure(ws, wstr0);
 
-        // Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms");
+        // Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms; Words : {wstr0.Count}");
         return wstr0;
     }
 

@@ -10,7 +10,7 @@ public class WordStructure
     {
         sets = new();
         var Pairs = Enumerable.Empty<(Word key, Word value)>();
-        RegexList = Pairs.Where(a => !a.key.Equals(a.value)).GroupBy(a => a.key).ToDictionary(b => new Regex(b.Select(w => w.value.extStr).Glue("|")), a => a.Key.extStr);
+        RegexList = new Dictionary<Regex, string>();
     }
 
     public WordStructure(WordSet ws)
@@ -18,6 +18,7 @@ public class WordStructure
         sets = new() { ws };
         var Pairs = sets.SelectMany(ws => ws.Pairs).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
         RegexList = Pairs.Where(a => !a.key.Equals(a.value)).GroupBy(a => a.key).ToDictionary(b => new Regex(b.Select(w => w.value.extStr).Glue("|")), a => a.Key.extStr);
+        // RegexList = sets.ToDictionary(ws => new Regex(ws.Content.Where(w => !w.Equals(ws.Key)).Select(w => w.extStr).Descending().Glue("|")), ws => ws.Key.extStr);
     }
 
     public WordStructure(WordStructure wstr)
@@ -25,6 +26,7 @@ public class WordStructure
         sets = wstr.sets.ToList();
         var Pairs = sets.SelectMany(ws => ws.Pairs).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
         RegexList = Pairs.Where(a => !a.key.Equals(a.value)).GroupBy(a => a.key).ToDictionary(b => new Regex(b.Select(w => w.value.extStr).Glue("|")), a => a.Key.extStr);
+        // RegexList = sets.ToDictionary(ws => new Regex(ws.Content.Where(w => !w.Equals(ws.Key)).Select(w => w.extStr).Descending().Glue("|")), ws => ws.Key.extStr);
     }
 
     public WordStructure(WordSet ws, WordStructure wstr)
@@ -41,6 +43,7 @@ public class WordStructure
         sets.Add(new WordSet(merged));
         var Pairs = sets.SelectMany(ws => ws.Pairs).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
         RegexList = Pairs.Where(a => !a.key.Equals(a.value)).GroupBy(a => a.key).ToDictionary(b => new Regex(b.Select(w => w.value.extStr).Glue("|")), a => a.Key.extStr);
+        // RegexList = sets.ToDictionary(ws => new Regex(ws.Content.Where(w => !w.Equals(ws.Key)).Select(w => w.extStr).Descending().Glue("|")), ws => ws.Key.extStr);
     }
 
     public Word ReduceWord(Word w)
