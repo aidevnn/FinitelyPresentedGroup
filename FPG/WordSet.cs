@@ -7,7 +7,7 @@ public class WordSet
     {
         set = new(ws);
         Key = set.Min();
-        Pairs = set.Where(w => w.weight != 0 && w.extStr.Length >= Key.extStr.Length).Select(w => (Key, w));
+        Pairs = set.Select(w => (Key, w));
         Content = set;
     }
     public Word Key { get; private set; }
