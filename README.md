@@ -2,7 +2,6 @@
 Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very very slow even for smallest groups.
 
 For example, it takes ~2000ms for generating Symm4 group of permutations.
-Many errors subsists and this project is in progress.
 ``` 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 
