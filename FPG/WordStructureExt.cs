@@ -15,7 +15,7 @@ public static class WordStructureExt
     public static WordStructure RewriteStruct(this WordStructure wstr, WordStructure other)
     {
         var wstr0 = new WordStructure(wstr);
-        foreach (var ws in other.WSets())
+        foreach (var ws in other)
         {
             var ws0 = wstr.RewriteSet(ws);
             wstr0 = new WordStructure(ws0, wstr0);
@@ -42,17 +42,16 @@ public static class WordStructureExt
     public static WordStructure Develop(this WordStructure wstr)
     {
         var sw = Stopwatch.StartNew();
-        var wsets = wstr.WSets();
         var wstr0 = new WordStructure(wstr);
         List<WordSet> sets = new();
-        foreach (var ws0 in wsets)
-            foreach (var ws1 in wsets)
+        foreach (var ws0 in wstr)
+            foreach (var ws1 in wstr)
                 sets.Add(wstr.Product(ws0, ws1));
 
         foreach (var ws in sets)
             wstr0 = new WordStructure(ws, wstr0);
 
-        // Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms; Words : {wstr0.Count}");
+        // Console.WriteLine($"Loop Time:{sw.ElapsedMilliseconds} ms; Words : {wstr0.TotalWords}");
         return wstr0;
     }
 
@@ -61,16 +60,16 @@ public static class WordStructureExt
         var wstr = new WordStructure(wstr0);
         for (int k = 0; k < loopMax; ++k)
         {
-            int sz0 = wstr.Count;
+            int sz0 = wstr.TotalWords;
             wstr = wstr.Develop();
-            if (sz0 == wstr.Count)
+            if (sz0 == wstr.TotalWords)
                 break;
         }
         return wstr;
     }
     public static void IsGroup(this WordStructure wordStructure)
     {
-        var keys = wordStructure.WSets().Select(ws => ws.Key).Ascending().ToHashSet();
+        var keys = wordStructure.Select(ws => ws.Key).Ascending().ToHashSet();
         var isComm = true;
         foreach (var e0 in keys)
         {
@@ -101,7 +100,7 @@ public static class WordStructureExt
     }
     public static void GroupTable(this WordStructure wordStructure)
     {
-        var keys = wordStructure.WSets().Select(ws => ws.Key).Ascending().ToList();
+        var keys = wordStructure.Select(ws => ws.Key).Ascending().ToList();
         if (keys.Count > 30)
         {
             Console.WriteLine("*** TOO HUGE ***");

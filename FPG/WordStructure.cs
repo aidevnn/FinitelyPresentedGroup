@@ -1,8 +1,9 @@
+using System.Collections;
 using System.Text.RegularExpressions;
 
 namespace FPG;
 
-public class WordStructure
+public class WordStructure : IEnumerable<WordSet>
 {
     List<WordSet> sets;
     Dictionary<Regex, string> RegexList { get; }
@@ -68,8 +69,7 @@ public class WordStructure
         return wi;
     }
 
-    public int Count => sets.Sum(ws => ws.Count);
-    public IEnumerable<WordSet> WSets() => sets;
+    public int TotalWords => sets.Sum(ws => ws.Count);
 
     public void Display()
     {
@@ -77,7 +77,7 @@ public class WordStructure
             ws.Display();
 
         Console.WriteLine();
-        Console.WriteLine($"Total Words : {Count}");
+        Console.WriteLine($"Total Words : {TotalWords}");
     }
 
     public void DisplayReprs()
@@ -92,4 +92,8 @@ public class WordStructure
         Console.WriteLine();
         Console.WriteLine($"Order = {sets.Count}");
     }
+
+    public IEnumerator<WordSet> GetEnumerator() => sets.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => sets.GetEnumerator();
 }
