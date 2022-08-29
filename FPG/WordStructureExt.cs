@@ -90,6 +90,7 @@ public static class WordStructureExt
         foreach (var e0 in keys)
         {
             var ei0 = e0.Invert();
+            HashSet<Word> res = new();
             foreach (var e1 in keys)
             {
                 var e2 = wordStructure.ReduceWord(new Word(ei0.extStr + e1.extStr));
@@ -99,13 +100,15 @@ public static class WordStructureExt
                     isComm &= e2.Equals(e3);
                 }
 
-                if (!keys.Contains(e2))
-                {
-                    Console.WriteLine("Is Group   : False");
-                    Console.WriteLine("Is Abelian : False");
-                    Console.WriteLine();
-                    return;
-                }
+                res.Add(e2);
+            }
+
+            if (!res.SetEquals(keys))
+            {
+                Console.WriteLine("Is Group   : False");
+                Console.WriteLine("Is Abelian : False");
+                Console.WriteLine();
+                return;
             }
         }
 
