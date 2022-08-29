@@ -50,5 +50,17 @@ public static class StringExt
     //     return word;
     // }
 
+    public static string LoopReduce(this string w0, string w1, Regex rg)
+    {
+        int sz = 0;
+        while (sz != w0.Length)
+        {
+            sz = w0.Length;
+            w0 = rg.Replace(w0, w1);
+        }
+
+        return w0.Reduce();
+    }
+
 }
 
