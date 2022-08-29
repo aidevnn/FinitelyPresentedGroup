@@ -7,7 +7,7 @@ public static class WordStructureExt
     public static WordSet RewriteSet(this WordStructure wstr, WordSet ws)
     {
         HashSet<Word> ws0 = new();
-        foreach (var w in ws.Content)
+        foreach (var w in ws)
             ws0.Add(wstr.ReduceWord(w));
 
         return new(ws0);
@@ -26,10 +26,10 @@ public static class WordStructureExt
     public static WordSet Product(this WordStructure wstr, WordSet ws0, WordSet ws1)
     {
         HashSet<Word> ws2 = new();
-        foreach (var w0 in ws0.Content)
+        foreach (var w0 in ws0)
         {
             var wi0 = w0.Invert();
-            foreach (var w1 in ws1.Content)
+            foreach (var w1 in ws1)
             {
                 var w2 = new Word(wi0.extStr + w1.extStr);
                 ws2.Add(w2);

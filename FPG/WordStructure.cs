@@ -16,7 +16,7 @@ public class WordStructure
     public WordStructure(WordSet ws)
     {
         sets = new() { ws };
-        var Pairs = sets.SelectMany(ws => ws.Pairs).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
+        var Pairs = sets.SelectMany(ws => ws.Select(w => (key: ws.Key, value: w))).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
         RegexList = Pairs.Where(a => !a.key.Equals(a.value)).GroupBy(a => a.key).ToDictionary(b => new Regex(b.Select(w => w.value.extStr).Glue("|")), a => a.Key.extStr);
         // RegexList = sets.ToDictionary(ws => new Regex(ws.Content.Where(w => !w.Equals(ws.Key)).Select(w => w.extStr).Descending().Glue("|")), ws => ws.Key.extStr);
     }
@@ -24,24 +24,24 @@ public class WordStructure
     public WordStructure(WordStructure wstr)
     {
         sets = wstr.sets.ToList();
-        var Pairs = sets.SelectMany(ws => ws.Pairs).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
+        var Pairs = sets.SelectMany(ws => ws.Select(w => (key: ws.Key, value: w))).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
         RegexList = Pairs.Where(a => !a.key.Equals(a.value)).GroupBy(a => a.key).ToDictionary(b => new Regex(b.Select(w => w.value.extStr).Glue("|")), a => a.Key.extStr);
         // RegexList = sets.ToDictionary(ws => new Regex(ws.Content.Where(w => !w.Equals(ws.Key)).Select(w => w.extStr).Descending().Glue("|")), ws => ws.Key.extStr);
     }
 
     public WordStructure(WordSet ws, WordStructure wstr)
     {
-        var merged = new HashSet<Word>(ws.Content);
+        var merged = new HashSet<Word>(ws);
         sets = new();
         foreach (var ws0 in wstr.sets)
         {
             if (ws0.Overlaps(merged))
-                merged.UnionWith(ws0.Content);
+                merged.UnionWith(ws0);
             else
                 sets.Add(ws0);
         }
         sets.Add(new WordSet(merged));
-        var Pairs = sets.SelectMany(ws => ws.Pairs).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
+        var Pairs = sets.SelectMany(ws => ws.Select(w => (key: ws.Key, value: w))).OrderByDescending(a => a.value.extStr.Length - a.key.extStr.Length).ThenByDescending(a => a.value);
         RegexList = Pairs.Where(a => !a.key.Equals(a.value)).GroupBy(a => a.key).ToDictionary(b => new Regex(b.Select(w => w.value.extStr).Glue("|")), a => a.Key.extStr);
         // RegexList = sets.ToDictionary(ws => new Regex(ws.Content.Where(w => !w.Equals(ws.Key)).Select(w => w.extStr).Descending().Glue("|")), ws => ws.Key.extStr);
     }
