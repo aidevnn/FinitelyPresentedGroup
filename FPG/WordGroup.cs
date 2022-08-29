@@ -11,6 +11,7 @@ public class WordGroup
             Structure = Structure.RewriteStruct(Relation.Structure(r));
 
         Structure = Structure.LoopDevelop();
+        Structure = Structure.RewriteStruct(Structure);
     }
 
     WordStructure Structure { get; }
