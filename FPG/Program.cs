@@ -3,7 +3,7 @@
 // WordGroup.Generate("a6"); // C6
 // WordGroup.Generate("a6"); // C6
 // WordGroup.Generate("a4", "b2", "abab"); // D4
-// WordGroup.Generate("a2", "b3", "ababab", "abab2=bab2a"); // A4
+// WordGroup.Generate("a2", "b3", "ababab"); // A4
 // WordGroup.Generate("a4", "b3", "abab");
 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
