@@ -10,6 +10,7 @@ public class WordSet : IEnumerable<Word>
         set = new(ws);
         Key = set.Min();
     }
+    public WordSet(Word w) : this(new[] { w }) { }
     public Word Key { get; private set; }
     public int Count => set.Count;
     public bool Overlaps(IEnumerable<Word> ws) => set.Overlaps(ws);

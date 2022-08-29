@@ -3,18 +3,17 @@ Bruteforce algorithm for creating all elements of a group presented by generator
 
 For example, it takes ~2000ms for generating Symm4 group of permutations.
 ``` 
-Generate("a2", "b2", "abab"); // Klein
+WordGroup.Generate("a2", "b2", "abab"); // Klein
 
-Generate("a3", "b2", "aba-1b-1"); // C6
+WordGroup.Generate("a3", "b2", "aba-1b-1"); // C6
 
-Generate("a2", "b2", "ababab"); // S3
+WordGroup.Generate("a2", "b2", "ababab"); // S3
 
-Generate("a4", "a2b-2", "b-1aba"); // H8
+WordGroup.Generate("a4", "a2b-2", "b-1aba"); // H8
 
-Generate("a3", "b6", "ab = ba"); // C3 x C6 
+WordGroup.Generate("a3", "b6", "ab = ba"); // C3 x C6
 
-Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
-
+WordGroup.Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
 ```
 
 will produce

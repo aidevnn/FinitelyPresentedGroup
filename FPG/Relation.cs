@@ -29,7 +29,8 @@ public class Relation
         {
             var s0 = word.extStr.Take(k).JoinChars();
             var s1 = word.extStr.Skip(k).JoinChars();
-            eq.Add(new Word(s1 + s0));
+            var w0 = new Word(s1 + s0);
+            eq.Add(w0);
         }
 
         structure = new WordStructure(new(eq), structure);
