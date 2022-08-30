@@ -1,7 +1,7 @@
 # FinitelyPresentedGroup
 Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very slow even for smallest groups.
 
-For example, it takes ~600ms for generating Symm4 group of permutations.
+For example, it takes ~4000ms for generating Frobenius group $F_{20}$.
 ``` 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 
