@@ -20,17 +20,22 @@ public static class EnumerableExt
     //     return us.Zip(other, (e0, e1) => e0.CompareTo(e1)).FirstOrDefault(i => i != 0, us.Count().CompareTo(other.Count()));
     // }
 
-    public static int SequenceCompare<U>(this IEnumerable<U> us, IEnumerable<U> other) where U : IComparable<U>
+    public static int SequenceCompare<U>(this IEnumerable<U> us, IEnumerable<U> other, IComparer<U> comparer)
     {
         var e0 = us.GetEnumerator();
         var e1 = other.GetEnumerator();
         while (e0.MoveNext() && e1.MoveNext())
         {
-            var comp = e0.Current.CompareTo(e1.Current);
+            var comp = comparer.Compare(e0.Current, e1.Current);
             if (comp != 0)
                 return comp;
         }
 
         return us.Count().CompareTo(other.Count());
+    }
+
+    public static int SequenceCompare<U>(this IEnumerable<U> us, IEnumerable<U> other) where U : IComparable<U>
+    {
+        return SequenceCompare(us, other, Comparer<U>.Default);
     }
 }

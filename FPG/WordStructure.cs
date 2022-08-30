@@ -63,7 +63,6 @@ public class WordStructure : IEnumerable<WordSet>
 
         return wi;
     }
-
     public int TotalWords => sets.Sum(ws => ws.Count);
 
     public void Display()

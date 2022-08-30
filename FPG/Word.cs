@@ -41,6 +41,7 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
     IEnumerator IEnumerable.GetEnumerator() => letters.GetEnumerator();
 
     public bool Equals(Word other) => string.Equals(extStr, other.extStr);
+
     public int CompareTo(Word other)
     {
         var compL = length.CompareTo(other.length);
@@ -62,4 +63,5 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
 
     public override string ToString() => length == 0 ? "()" : letters.Glue();
     public override int GetHashCode() => extStr.GetHashCode();
+
 }

@@ -1,7 +1,10 @@
 ﻿using FPG;
 
+new WordGroup("a2", "b2", "abab"); // starting up
+
 // WordGroup.Generate("a6"); // C6
 // WordGroup.Generate("a4", "b2", "abab"); // D4
+// WordGroup.Generate("a5", "b2", "abab"); // D5
 // WordGroup.Generate("a2", "b3", "ababab"); // A4
 
 // WordGroup.Generate("a2", "b3", "ab-1ab"); // C6
@@ -20,7 +23,6 @@
 // WordGroup.Generate("a2", "b2", "c2", "abab", "acac", "bcbc"); // K8
 // WordGroup.Generate("a2", "b2", "c3", "abab", "acac", "bc=cb");
 
-WordGroup.Generate("a2", "b2", "abab"); // Klein
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 WordGroup.Generate("a3", "b2", "aba-1b-1"); // C6
 WordGroup.Generate("a2", "b2", "ababab"); // S3

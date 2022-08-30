@@ -58,4 +58,15 @@ public static class LetterExt
         return stack.Reverse();
     }
     public static IEnumerable<Letter> ParseExtendedWord(this string word) => word.Select(c => From(c, 1)).Reduce();
+
+    public static IEnumerable<Letter> AlwaysPositive(this IEnumerable<Letter> letters, Dictionary<Letter, Letter> subst)
+    {
+        foreach (var l in letters)
+        {
+            if (subst.ContainsKey(l))
+                yield return subst[l];
+            else
+                yield return l;
+        }
+    }
 }
