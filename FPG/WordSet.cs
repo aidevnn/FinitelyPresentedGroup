@@ -14,7 +14,6 @@ public class WordSet : IEnumerable<Word>
     public WordSet(Word w) : this(new[] { w }) { }
     public Word Key { get; private set; }
     public Word MaxWord { get; }
-    public int MaxLength { get; }
     public int Count => set.Count;
     public bool Overlaps(IEnumerable<Word> ws) => set.Overlaps(ws);
     public string RegExPattern => this.Descending().Where(w => !w.Equals(Key)).Select(w => w.extStr).Glue("|");
