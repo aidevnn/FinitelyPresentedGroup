@@ -105,9 +105,11 @@ public static class WordStructureExt
         Console.WriteLine($"Is Abelian : {isComm}");
         Console.WriteLine();
 
-        // Verifying group and abelian
+        // Verifying rows and columns
         // Console.WriteLine(keys.Ascending().Glue(","));
+        // Console.WriteLine("All Rows");
         // foreach (var r in rows) Console.WriteLine(r.Ascending().Glue(","));
+        // Console.WriteLine("All Columns");
         // foreach (var c in cols) Console.WriteLine(c.Ascending().Glue(","));
         // Console.WriteLine();
         return;
