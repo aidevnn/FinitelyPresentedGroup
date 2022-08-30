@@ -4,6 +4,7 @@ namespace FPG;
 
 public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
 {
+    public static int count = 0;
     public static Word Empty => new Word();
     IEnumerable<Letter> letters;
     public Word()
@@ -18,7 +19,7 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
         length = letters.Count();
         weight = letters.Sum(l => l.weight);
         extStr = new String(letters.SelectMany(l => l.Extend()).ToArray());
-        ++WordStructureExt.count;
+        ++Word.count;
     }
     private Word(Word w)
     {

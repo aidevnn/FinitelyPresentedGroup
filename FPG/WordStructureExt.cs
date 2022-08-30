@@ -3,7 +3,6 @@ namespace FPG;
 
 public static class WordStructureExt
 {
-    public static int count = 0;
     public static WordSet RewriteSet(this WordStructure wstr, WordSet ws)
     {
         HashSet<Word> ws0 = new();

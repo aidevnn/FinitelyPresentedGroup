@@ -19,7 +19,7 @@ public class WordGroup
     public static WordStructure Generate(params string[] relations)
     {
         var sw = Stopwatch.StartNew();
-        WordStructureExt.count = 0;
+        Word.count = 0;
 
         var wg = new WordGroup(relations);
 
@@ -29,7 +29,7 @@ public class WordGroup
         Console.WriteLine();
 
         wg.Structure.Display();
-        Console.WriteLine($"Total Time  : {sw.ElapsedMilliseconds} ms; Total Created Words : {WordStructureExt.count}");
+        Console.WriteLine($"Total Time  : {sw.ElapsedMilliseconds} ms; Total Created Words : {Word.count}");
         return wg.Structure;
     }
 }
