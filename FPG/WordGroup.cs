@@ -11,7 +11,6 @@ public class WordGroup
             Structure = Structure.RewriteStruct(Relation.Structure(r));
 
         Structure = Structure.LoopDevelop();
-        Structure = Structure.RewriteStruct(Structure);
     }
 
     WordStructure Structure { get; }
@@ -19,7 +18,7 @@ public class WordGroup
     public static WordStructure Generate(params string[] relations)
     {
         var sw = Stopwatch.StartNew();
-        Word.count = 0;
+        Word.ResetCounter();
 
         var wg = new WordGroup(relations);
 

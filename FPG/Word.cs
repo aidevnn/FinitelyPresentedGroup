@@ -4,7 +4,8 @@ namespace FPG;
 
 public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
 {
-    public static int count = 0;
+    public static int count { get; private set; }
+    public static void ResetCounter() => count = 0;
     public static Word Empty => new Word();
     IEnumerable<Letter> letters;
     public Word()
@@ -13,22 +14,24 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
         weight = length = 0;
         extStr = "";
     }
-    public Word(string word)
+    public Word(IEnumerable<Letter> l)
     {
-        letters = word.ToLetters();
+        letters = l;
         length = letters.Count();
         weight = letters.Sum(l => l.weight);
         extStr = new String(letters.SelectMany(l => l.Extend()).ToArray());
         ++Word.count;
     }
-    private Word(Word w)
+    public Word(string word)
     {
-        letters = w.Select(l => l.Invert()).Reverse();
-        length = w.length;
-        weight = w.weight;
+        letters = word.ParseReducedWord();
+        length = letters.Count();
+        weight = letters.Sum(l => l.weight);
         extStr = new String(letters.SelectMany(l => l.Extend()).ToArray());
+        ++Word.count;
     }
-    public Word Invert() => new Word(this);
+    public Word Add(Word w) => new Word(this.Concat(w).Reduce());
+    public Word Invert() => new Word(letters.Reverse().Select(l => l.Invert()));
     public int length { get; }
     public int weight { get; }
     public string extStr { get; }

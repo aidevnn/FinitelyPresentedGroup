@@ -10,12 +10,13 @@ public static class StringExt
         var pattern = alph.Select(c => (c, char.ToUpper(c))).Select(t => $"{t.c}{t.Item2}|{t.Item2}{t.c}").Glue("|");
         ReduceRgx = new Regex(pattern);
     }
-    public static string JoinChars(this IEnumerable<char> cs) => string.Join("", cs);
     public static bool AreInvert(char c0, char c1)
     {
         var d = c0 - c1;
         return d == 32 || d == -32;
     }
+
+    public static bool AreInvert(string s0, string s1) => s0.Length == s1.Length && s0.Zip(s1).All(e => AreInvert(e.First, e.Second));
 
     public static string Reduce(this string word)
     {
@@ -48,16 +49,16 @@ public static class StringExt
     //     return word;
     // }
 
-    public static string LoopReduce(this string w0, string w1, Regex rg)
+    public static string LoopReduce(this string input, string replacement, Regex rg)
     {
         int sz = 0;
-        while (sz != w0.Length)
+        while (sz != input.Length)
         {
-            sz = w0.Length;
-            w0 = rg.Replace(w0, w1);
+            sz = input.Length;
+            input = rg.Replace(input, replacement);
         }
 
-        return w0.Reduce();
+        return input.Reduce();
     }
 
 }

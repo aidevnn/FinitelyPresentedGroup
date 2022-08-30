@@ -1,4 +1,3 @@
-using System.Diagnostics;
 namespace FPG;
 
 public static class WordStructureExt
@@ -49,7 +48,7 @@ public static class WordStructureExt
             var wi0 = w0.Invert();
             foreach (var w1 in ws1)
             {
-                var w2 = new Word(wi0.extStr + w1.extStr);
+                var w2 = wi0.Add(w1);
                 ws2.Add(w2);
             }
         }
@@ -69,7 +68,6 @@ public static class WordStructureExt
 
         return wstr0;
     }
-
     public static WordStructure LoopDevelop(this WordStructure wstr0, int loopMax = 5)
     {
         var wstr = new WordStructure(wstr0);
@@ -84,36 +82,34 @@ public static class WordStructureExt
     }
     public static void IsGroup(this WordStructure wordStructure)
     {
-        var keys = wordStructure.Select(ws => ws.Key).Ascending().ToHashSet();
-        var isComm = true;
-        foreach (var e0 in keys)
+        var keys = wordStructure.Select(ws => ws.Key).ToHashSet();
+        var table = new Word[keys.Count, keys.Count];
+        var idx = Enumerable.Range(0, keys.Count).ToArray();
+        var arr = wordStructure.Select(ws => ws.Key).Ascending().ToArray();
+        for (int i = 0; i < idx.Length; ++i)
         {
-            var ei0 = e0.Invert();
-            HashSet<Word> res = new();
-            foreach (var e1 in keys)
+            var e0 = arr[i];
+            for (int j = 0; j < idx.Length; ++j)
             {
-                var e2 = wordStructure.ReduceWord(new Word(ei0.extStr + e1.extStr));
-                if (isComm)
-                {
-                    var e3 = wordStructure.ReduceWord(new Word(e1.extStr + ei0.extStr));
-                    isComm &= e2.Equals(e3);
-                }
-
-                res.Add(e2);
-            }
-
-            if (!res.SetEquals(keys))
-            {
-                Console.WriteLine("Is Group   : False");
-                Console.WriteLine("Is Abelian : False");
-                Console.WriteLine();
-                return;
+                var e1 = arr[j];
+                table[i, j] = wordStructure.ReduceWord(e0.Add(e1));
             }
         }
 
-        Console.WriteLine("Is Group   : True");
+        var rows = idx.Select(i => idx.Select(j => table[i, j]));
+        var cols = idx.Select(j => idx.Select(i => table[i, j]));
+        var isGroup = rows.All(keys.SetEquals) && cols.All(keys.SetEquals);
+        var isComm = idx.SelectMany(i => idx.Select(j => (i, j))).All(e => table[e.i, e.j].Equals(table[e.j, e.i]));
+
+        Console.WriteLine($"Is Group   : {isGroup}");
         Console.WriteLine($"Is Abelian : {isComm}");
         Console.WriteLine();
+
+        // Verifying group and abelian
+        // Console.WriteLine(keys.Ascending().Glue(","));
+        // foreach (var r in rows) Console.WriteLine(r.Ascending().Glue(","));
+        // foreach (var c in cols) Console.WriteLine(c.Ascending().Glue(","));
+        // Console.WriteLine();
         return;
     }
     public static void GroupTable(this WordStructure wordStructure)
@@ -135,11 +131,7 @@ public static class WordStructureExt
         {
             List<Word> row = new();
             foreach (var w1 in keys.Skip(1))
-            {
-                var w2 = new Word(w0.extStr + w1.extStr);
-                var w3 = wordStructure.ReduceWord(w2);
-                row.Add(w3);
-            }
+                row.Add(wordStructure.ReduceWord(w0.Add(w1)));
 
             var rowStr = string.Format("{0} | {1}", string.Format(fmt, w0.extStr2), row.Select(w => w.extStr2).Glue(" ", fmt));
             Console.WriteLine(rowStr);

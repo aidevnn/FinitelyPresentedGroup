@@ -1,7 +1,7 @@
 # FinitelyPresentedGroup
-Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very very slow even for smallest groups.
+Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very slow even for smallest groups.
 
-For example, it takes ~2000ms for generating Symm4 group of permutations.
+For example, it takes ~600ms for generating Symm4 group of permutations.
 ``` 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 
@@ -15,7 +15,6 @@ WordGroup.Generate("a3", "b6", "ab = ba"); // C3 x C6
 
 WordGroup.Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
 ```
-
 will produce
 ```
 G = { (), a, b, ab }
@@ -55,7 +54,7 @@ Repr : ab
     ba => ba
 
 Total Words : 15
-Total Time  : 29 ms; Total Created Words : 1867
+Total Time  : 17 ms; Total Created Words : 1817
 ```
 and
 ```
@@ -110,7 +109,7 @@ Repr : bA
     a-1b => Ab
 
 Total Words : 23
-Total Time  : 71 ms; Total Created Words : 4001
+Total Time  : 44 ms; Total Created Words : 3938
 ```
 and
 ```
@@ -161,7 +160,7 @@ Repr : aba
     bab => bab
 
 Total Words : 19
-Total Time  : 66 ms; Total Created Words : 3315
+Total Time  : 34 ms; Total Created Words : 3309
 ```
 and
 ```
@@ -251,7 +250,7 @@ Repr : aB
     ab3    => abbb
 
 Total Words : 52
-Total Time  : 573 ms; Total Created Words : 34791
+Total Time  : 224 ms; Total Created Words : 35418
 ```
 and
 ```
@@ -384,7 +383,7 @@ Repr : Abbb
     ba-1b2 => bAbb
 
 Total Words : 65
-Total Time  : 828 ms; Total Created Words : 44555
+Total Time  : 391 ms; Total Created Words : 44341
 ```
 and
 ```
@@ -526,7 +525,7 @@ Repr : abcabc
     abcabc => abcabc
 
 Total Words : 56
-Total Time  : 2079 ms; Total Created Words : 98126
+Total Time  : 622 ms; Total Created Words : 97866
 ```
 
 ## More working Examples
@@ -535,13 +534,13 @@ WordGroup.Generate("a6"); // C6
 WordGroup.Generate("a4", "b2", "abab"); // D4
 WordGroup.Generate("a2", "b3", "ababab"); // A4
 WordGroup.Generate("a2", "b3", "ab-1ab"); // C6
-WordGroup.Generate("a4", "b3", "aba-1b"); // ?
-WordGroup.Generate("a4", "b3", "abab"); // ?
+WordGroup.Generate("a4", "b3", "aba-1b");
+WordGroup.Generate("a4", "b3", "abab");
 WordGroup.Generate("a2", "b2", "c3", "abab", "bc=ca"); // S4
 WordGroup.Generate("a2", "b2", "c2", "abcbc"); // D4
 WordGroup.Generate("a6", "b4", "abab-1", "a3b2"); // H12
 WordGroup.Generate("a5", "b4", "abababab", "a2ba-1b-1"); // F20
-WordGroup.Generate("a4", "b4", "abab-1"); // ?
+WordGroup.Generate("a4", "b4", "abab-1");
 WordGroup.Generate("a2", "b2", "c2", "abab", "acac", "bcbc"); // K8
-WordGroup.Generate("a2", "b2", "c3", "abab", "acac", "bc=cb"); // K4 x C3
+WordGroup.Generate("a2", "b2", "c3", "abab", "acac", "bc=cb");
 ```

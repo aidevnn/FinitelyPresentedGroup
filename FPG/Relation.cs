@@ -27,8 +27,8 @@ public class Relation
         HashSet<Word> eq = new() { Word.Empty };
         for (int k = 0; k < word.extStr.Length; ++k)
         {
-            var s0 = word.extStr.Take(k).JoinChars();
-            var s1 = word.extStr.Skip(k).JoinChars();
+            var s0 = word.extStr.Take(k).Glue();
+            var s1 = word.extStr.Skip(k).Glue();
             var w0 = new Word(s1 + s0);
             eq.Add(w0);
         }
@@ -38,8 +38,8 @@ public class Relation
         {
             for (int k = 0; k < w.extStr.Length; ++k)
             {
-                var s0 = w.extStr.Take(k).JoinChars();
-                var s1 = w.extStr.Skip(k).JoinChars();
+                var s0 = w.extStr.Take(k).Glue();
+                var s1 = w.extStr.Skip(k).Glue();
                 var w0 = new Word(s0);
                 var w1 = new Word(s1).Invert();
                 var ws = new WordSet(new[] { w0, w1 });
