@@ -528,3 +528,22 @@ Repr : abcabc
 Total Words : 56
 Total Time  : 2079 ms; Total Created Words : 98126
 ```
+
+## More working Examples
+```
+WordGroup.Generate("a6"); // C6
+WordGroup.Generate("a4", "b2", "abab"); // D4
+WordGroup.Generate("a2", "b3", "ababab"); // A4
+WordGroup.Generate("a2", "b3", "ab-1ab"); // C6
+WordGroup.Generate("a4", "b3", "aba-1b"); // ?
+WordGroup.Generate("a4", "b3", "abab"); // ?
+WordGroup.Generate("a2", "b2", "c3", "abab", "bc=ca"); // S4
+WordGroup.Generate("a3", "b2", "abab"); // S3
+WordGroup.Generate("a2", "b2", "c2", "abcbc"); // D8
+WordGroup.Generate("a6", "b4", "abab-1", "a3b2"); // H12
+WordGroup.Generate("a5", "b4", "abababab", "a2ba-1b-1"); // F20
+WordGroup.Generate("a3", "b2", "abab"); // S3
+WordGroup.Generate("a4", "b4", "abab-1"); // ?
+WordGroup.Generate("a2", "b2", "c2", "abab", "acac", "bcbc"); // K8
+WordGroup.Generate("a2", "b2", "c3", "abab", "acac", "bc=cb"); // K4 x C3
+```
