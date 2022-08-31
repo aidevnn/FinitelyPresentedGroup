@@ -52,6 +52,10 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
         if (compW != 0)
             return compW;
 
+        var compP = this.Count(l => l.pow < 0).CompareTo(other.Count(l => l.pow < 0));
+        if (compP != 0)
+            return compP;
+
         return this.SequenceCompare(other);
     }
 

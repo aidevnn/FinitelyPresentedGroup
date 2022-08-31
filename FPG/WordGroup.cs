@@ -11,19 +11,10 @@ public class WordGroup
             Structure = Structure.RewriteStruct(Relation.Structure(r));
 
         Structure = Structure.LoopDevelop();
-
-        var list1 = Structure.Where(ws => !ws.Contains(Word.Empty)).Select(ws => ws.Where(w => w.length == 1)).Where(lw => lw.Count() != 0).Select(lw => lw.Select(w => w.First()));
-        var list2 = Structure.SelectMany(ws => ws.SelectMany(w => w.Select(l => l))).Distinct().Where(l => l.pow < 0 && list1.Any(l0 => l0.Contains(l)));
-        var list3 = list2.Select(l => (l, lt: list1.First(l0 => l0.Contains(l)))).Select(p => (p.l, s: p.lt.First(l => l.c == p.l.c && l.pow > 0)));
-
-        Substitution = list3.ToDictionary(a => a.l, a => a.s);
-        Elements = Structure.Select(ws => Substitute(ws.Key)).Ascending().ToArray();
+        Elements = Structure.Select(ws => ws.Key).Ascending().ToArray();
     }
-
     WordStructure Structure { get; }
     Word[] Elements { get; }
-    Dictionary<Letter, Letter> Substitution { get; }
-    Word Substitute(Word w) => new Word(w.AlwaysPositive(Substitution));
     public void DisplayElements()
     {
         var keys = Elements.ToHashSet();
@@ -36,7 +27,7 @@ public class WordGroup
             {
                 var e1 = Elements[j];
                 var e2 = Structure.ReduceWord(e0.Add(e1));
-                table[i, j] = Substitute(e2);
+                table[i, j] = e2;
             }
         }
 
@@ -54,17 +45,17 @@ public class WordGroup
         // foreach (var c in cols) Console.WriteLine(c.Ascending().Glue(","));
         // Console.WriteLine();
 
-        Console.WriteLine("G = {{ {0} }}", Elements.Glue(", "));
+        Console.WriteLine("G = {{ {0} }}", Elements.Select(w => w.extStr2).Glue(", "));
         Console.WriteLine($"Order      : {keys.Count}");
         Console.WriteLine($"Is Group   : {isGroup}");
         Console.WriteLine($"Is Abelian : {isComm}");
         Console.WriteLine();
 
-        var digits = Elements.Max(w => w.ToString().Length);
+        var digits = Elements.Max(w => w.extStr2.Length);
         var fmt = $"{{0,{digits}}}";
         Console.WriteLine("Table");
         foreach (var r in rows)
-            Console.WriteLine(r.Glue(" ", fmt));
+            Console.WriteLine(r.Select(w => w.extStr2).Glue(" ", fmt));
 
         Console.WriteLine();
 
@@ -77,9 +68,8 @@ public class WordGroup
     }
     void DisplayClasses(WordSet ws, string fmt)
     {
-        var reprs = string.Format(fmt.Replace("0,", "0,-"), Substitute(ws.Key));
-        var sets = ws.Union(ws.Select(Substitute)).Ascending().ToHashSet();
-        Console.WriteLine($"    {reprs} => {{ {sets.Glue(", ")} }}");
+        var reprs = string.Format(fmt.Replace("0,", "0,-"), ws.Key.extStr2);
+        Console.WriteLine($"    {reprs} => {{ {ws.Ascending().Select(w => w.extStr2).Glue(", ")} }}");
     }
     public static WordStructure Generate(params string[] relations)
     {

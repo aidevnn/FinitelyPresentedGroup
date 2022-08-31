@@ -38,4 +38,5 @@ public static class EnumerableExt
     {
         return SequenceCompare(us, other, Comparer<U>.Default);
     }
+
 }

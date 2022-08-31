@@ -33,13 +33,13 @@ Table
 ab  b  a ()
 
 Classes
-    () => { (), a2, b2, a-2, b-2, abab, baba }
-    a  => { a, a-1, bab }
-    b  => { b, b-1, aba }
+    () => { (), aa, bb, AA, BB, abab, baba }
+    a  => { a, A, bab }
+    b  => { b, B, aba }
     ab => { ab, ba }
 
 Total Words : 15
-Total Time  : 10 ms; Total Created Words : 1817
+Total Time  : 10 ms; Total Created Words : 1778
 ```
 and
 ```
@@ -47,29 +47,29 @@ WordGroup.Generate("a3", "b2", "aba-1b-1"); // C6
 
 output :
 
-G = { (), a, b, a2, ab, ba2 }
+G = { (), a, b, A, ab, bA }
 Order      : 6
 Is Group   : True
 Is Abelian : True
 
 Table
- ()   a   b  a2  ab ba2
-  a  a2  ab  () ba2   b
-  b  ab  () ba2   a  a2
- a2  () ba2   a   b  ab
- ab ba2   a   b  a2  ()
-ba2   b  a2  ab  ()   a
+()  a  b  A ab bA
+ a  A ab () bA  b
+ b ab () bA  a  A
+ A () bA  a  b ab
+ab bA  a  b  A ()
+bA  b  A ab ()  a
 
 Classes
-    ()  => { (), b2, b-2, a3, a-3, aba-1b, baba-1, ba-1ba, a-1bab, aba2b, baba2, ba2ba, a2bab }
-    a   => { a, a-2, bab }
-    b   => { b, b-1, aba-1, a-1ba, aba2, a2ba }
-    a2  => { a-1, a2, ba-1b, ba2b }
-    ab  => { ab, ba }
-    ba2 => { ba-1, a-1b, ba2, a2b }
+    () => { (), bb, BB, aaa, AAA, abAb, babA, bAba, Abab }
+    a  => { a, AA, bab }
+    b  => { b, B, abA, Aba }
+    A  => { A, aa, bAb }
+    ab => { ab, ba }
+    bA => { bA, Ab }
 
 Total Words : 23
-Total Time  : 26 ms; Total Created Words : 3945
+Total Time  : 31 ms; Total Created Words : 3830
 ```
 and
 ```
@@ -91,15 +91,15 @@ Table
 aba  ab  ba   a   b  ()
 
 Classes
-    ()  => { (), a2, b2, a-2, b-2, ababab, bababa }
-    a   => { a, a-1, babab }
-    b   => { b, b-1, ababa }
+    ()  => { (), aa, bb, AA, BB, ababab, bababa }
+    a   => { a, A, babab }
+    b   => { b, B, ababa }
     ab  => { ab, baba }
     ba  => { ba, abab }
     aba => { aba, bab }
 
 Total Words : 19
-Total Time  : 19 ms; Total Created Words : 3274
+Total Time  : 27 ms; Total Created Words : 3207
 ```
 and
 ```
@@ -107,33 +107,33 @@ WordGroup.Generate("a4", "a2b-2", "b-1aba"); // H8
 
 output :
 
-G = { (), a, b, a2, a3, b3, ab, ab3 }
+G = { (), a, b, A, B, aa, ab, ba }
 Order      : 8
 Is Group   : True
 Is Abelian : False
 
 Table
- ()   a   b  a2  a3  b3  ab ab3
-  a  a2  ab  a3  () ab3  b3   b
-  b ab3  a2  b3  ab  ()   a  a3
- a2  a3  b3  ()   a   b ab3  ab
- a3  () ab3   a  a2  ab   b  b3
- b3  ab  ()   b ab3  a2  a3   a
- ab   b  a3 ab3  b3   a  a2  ()
-ab3  b3   a  ab   b  a3  ()  a2
+()  a  b  A  B aa ab ba
+ a aa ab () ba  A  B  b
+ b ba aa ab ()  B  a  A
+ A () ba aa ab  a  b  B
+ B ab () ba aa  b  A  a
+aa  A  B  a  b () ba ab
+ab  b  A  B  a ba aa ()
+ba  B  a  b  A ab () aa
 
 Classes
-    ()  => { (), a4, a-4, a2b2, a2b-2, b2a2, b-2a2, ab2a, ab-2a, ba2b, a-1b2a-1, b-1a2b-1, a3b2a3, b3a2b3, abab-1, ab-1a-1b-1, baba-1, ba-1b-1a-1, abab3, baba3, ab3a3b3, ba3b3a3 }
-    a   => { a, a-3, a-1b2, b2a-1, b2a3, a3b2, ba-1b-1, ba3b3 }
-    b   => { b, b-3, b-1a2, a2b-1, a2b3, b3a2, aba, ab-1a-1, ab3a3 }
-    a3  => { a-1, a3, ab2, ab-2, b2a, b-2a, bab-1, bab3 }
-    b3  => { b-1, b3, ba2, a2b, aba-1, a-1b-1a-1, aba3, a3b3a3 }
-    a2  => { a2, b2, a-2, b-2 }
-    ab  => { ab, ba-1, a-1b-1, b-1a, ba3, b3a, b-3a-1, a3b3 }
-    ab3 => { ab-1, ba, a-1b, b-1a-1, ab3, a3b, b3a3 }
+    () => { (), aaaa, AAAA, aabb, bbaa, aaBB, BBaa, baab, aBBa, AbbA, BaaB, abaB, babA, aBAB, bABA }
+    a  => { a, AAA, Abb, bbA, bab, bAB }
+    b  => { b, BBB, Baa, aaB, aba, aBA }
+    A  => { A, aaa, aBB, BBa, baB }
+    B  => { B, bbb, baa, aab, abA, ABA }
+    aa => { aa, bb, AA, BB }
+    ab => { ab, bA, Ba, AB, bbba }
+    ba => { ba, aB, Ab, BA, abbb }
 
 Total Words : 52
-Total Time  : 205 ms; Total Created Words : 35483
+Total Time  : 256 ms; Total Created Words : 35401
 ```
 and
 ```
@@ -141,53 +141,53 @@ WordGroup.Generate("a3", "b6", "ab = ba"); // C3 x C6
 
 output :
 
-G = { (), a, b, a2, b2, b3, b4, b5, ab, ab2, ba2, ab3, a2b2, ab4, a2b3, ab5, a2b4, a2b5 }
+G = { (), a, b, A, B, bb, BB, bbb, ab, aB, bA, AB, abb, aBB, Abb, ABB, abbb, Abbb }
 Order      : 18
 Is Group   : True
 Is Abelian : True
 
 Table
-  ()    a    b   a2   b2   b3   b4   b5   ab  ab2  ba2  ab3 a2b2  ab4 a2b3  ab5 a2b4 a2b5
-   a   a2   ab   ()  ab2  ab3  ab4  ab5  ba2 a2b2    b a2b3   b2 a2b4   b3 a2b5   b4   b5
-   b   ab   b2  ba2   b3   b4   b5   ()  ab2  ab3 a2b2  ab4 a2b3  ab5 a2b4    a a2b5   a2
-  a2   ()  ba2    a a2b2 a2b3 a2b4 a2b5    b   b2   ab   b3  ab2   b4  ab3   b5  ab4  ab5
-  b2  ab2   b3 a2b2   b4   b5   ()    b  ab3  ab4 a2b3  ab5 a2b4    a a2b5   ab   a2  ba2
-  b3  ab3   b4 a2b3   b5   ()    b   b2  ab4  ab5 a2b4    a a2b5   ab   a2  ab2  ba2 a2b2
-  b4  ab4   b5 a2b4   ()    b   b2   b3  ab5    a a2b5   ab   a2  ab2  ba2  ab3 a2b2 a2b3
-  b5  ab5   () a2b5    b   b2   b3   b4    a   ab   a2  ab2  ba2  ab3 a2b2  ab4 a2b3 a2b4
-  ab  ba2  ab2    b  ab3  ab4  ab5    a a2b2 a2b3   b2 a2b4   b3 a2b5   b4   a2   b5   ()
- ab2 a2b2  ab3   b2  ab4  ab5    a   ab a2b3 a2b4   b3 a2b5   b4   a2   b5  ba2   ()    b
- ba2    b a2b2   ab a2b3 a2b4 a2b5   a2   b2   b3  ab2   b4  ab3   b5  ab4   ()  ab5    a
- ab3 a2b3  ab4   b3  ab5    a   ab  ab2 a2b4 a2b5   b4   a2   b5  ba2   () a2b2    b   b2
-a2b2   b2 a2b3  ab2 a2b4 a2b5   a2  ba2   b3   b4  ab3   b5  ab4   ()  ab5    b    a   ab
- ab4 a2b4  ab5   b4    a   ab  ab2  ab3 a2b5   a2   b5  ba2   () a2b2    b a2b3   b2   b3
-a2b3   b3 a2b4  ab3 a2b5   a2  ba2 a2b2   b4   b5  ab4   ()  ab5    b    a   b2   ab  ab2
- ab5 a2b5    a   b5   ab  ab2  ab3  ab4   a2  ba2   () a2b2    b a2b3   b2 a2b4   b3   b4
-a2b4   b4 a2b5  ab4   a2  ba2 a2b2 a2b3   b5   ()  ab5    b    a   b2   ab   b3  ab2  ab3
-a2b5   b5   a2  ab5  ba2 a2b2 a2b3 a2b4   ()    b    a   b2   ab   b3  ab2   b4  ab3  ab4
+  ()    a    b    A    B   bb   BB  bbb   ab   aB   bA   AB  abb  aBB  Abb  ABB abbb Abbb
+   a    A   ab   ()   aB  abb  aBB abbb   bA   AB    b    B  Abb  ABB   bb   BB Abbb  bbb
+   b   ab   bb   bA   ()  bbb    B   BB  abb    a  Abb    A abbb   aB Abbb   AB  aBB  ABB
+   A   ()   bA    a   AB  Abb  ABB Abbb    b    B   ab   aB   bb   BB  abb  aBB  bbb abbb
+   B   aB   ()   AB   BB    b  bbb   bb    a  aBB    A  ABB   ab abbb   bA Abbb  abb  Abb
+  bb  abb  bbb  Abb    b   BB   ()    B abbb   ab Abbb   bA  aBB    a  ABB    A   aB   AB
+  BB  aBB    B  ABB  bbb   ()   bb    b   aB abbb   AB Abbb    a  abb    A  Abb   ab   bA
+ bbb abbb   BB Abbb   bb    B    b   ()  aBB  abb  ABB  Abb   aB   ab   AB   bA    a    A
+  ab   bA  abb    b    a abbb   aB  aBB  Abb    A   bb   () Abbb   AB  bbb    B  ABB   BB
+  aB   AB    a    B  aBB   ab abbb  abb    A  ABB   ()   BB   bA Abbb    b  bbb  Abb   bb
+  bA    b  Abb   ab    A Abbb   AB  ABB   bb   ()  abb    a  bbb    B abbb   aB   BB  aBB
+  AB    B    A   aB  ABB   bA Abbb  Abb   ()   BB    a  aBB    b  bbb   ab abbb   bb  abb
+ abb  Abb abbb   bb   ab  aBB    a   aB Abbb   bA  bbb    b  ABB    A   BB   ()   AB    B
+ aBB  ABB   aB   BB abbb    a  abb   ab   AB Abbb    B  bbb    A  Abb   ()   bb   bA    b
+ Abb   bb Abbb  abb   bA  ABB    A   AB  bbb    b abbb   ab   BB   ()  aBB    a    B   aB
+ ABB   BB   AB  aBB Abbb    A  Abb   bA    B  bbb   aB abbb   ()   bb    a  abb    b   ab
+abbb Abbb  aBB  bbb  abb   aB   ab    a  ABB  Abb   BB   bb   AB   bA    B    b    A   ()
+Abbb  bbb  ABB abbb  Abb   AB   bA    A   BB   bb  aBB  abb    B    b   aB   ab   ()    a
 
 Classes
-    ()   => { (), a3, a-3, b6, b-6, aba-1b-1, ab-1a-1b, bab-1a-1, ba-1b-1a, a-1bab-1, a-1b-1ab, b-1aba-1, b-1a-1ba, aba2b5, ab5a2b, bab5a2, ba2b5a, a2bab5, a2b5ab, b5aba2, b5a2ba }
-    a    => { a, a-2, bab-1, b-1ab, bab5, b5ab }
-    b    => { b, b-5, aba-1, a-1ba, aba2, a2ba }
-    a2   => { a-1, a2, ba-1b-1, b-1a-1b, ba2b5, b5a2b }
-    b5   => { b-1, b5, ab-1a-1, a-1b-1a, ab5a2, a2b5a }
-    b2   => { b2, b-4, ab2a-1, a-1b2a, ab2a2, a2b2a }
-    b4   => { b-2, b4, ab-2a-1, a-1b-2a, ab4a2, a2b4a }
-    b3   => { b3, b-3 }
+    ()   => { (), aaa, AAA, bbbbbb, BBBBBB, abAB, aBAb, baBA, bABa, AbaB, ABab, BabA, BAba }
+    a    => { a, AA, baB, Bab }
+    b    => { b, BBBBB, abA, Aba }
+    A    => { A, aa, bAB, BAb }
+    B    => { B, bbbbb, aBA, ABa }
+    bb   => { bb, BBBB, abbA, Abba }
+    BB   => { BB, bbbb, aBBA, ABBa }
+    bbb  => { bbb, BBB }
     ab   => { ab, ba }
-    ab5  => { ab-1, b-1a, ab5, b5a }
-    ba2  => { ba-1, a-1b, ba2, a2b }
-    a2b5 => { a-1b-1, b-1a-1, a2b5, b5a2 }
-    ab2  => { ab2, b2a, a-1b2a-1, a2b2a2 }
-    ab4  => { ab-2, b-2a, ab4, b4a, a-1b-2a-1, a2b4a2 }
-    a2b2 => { a-1b2, b2a-1, a2b2, b2a2, ab2a }
-    a2b4 => { a-1b-2, b-2a-1, a2b4, b4a2, ab-2a, ba-1b3, ab4a, ba2b3 }
-    ab3  => { ab3, b3a }
-    a2b3 => { a-1b3, b3a-1, a2b3, b3a2, ba-1b2, ba2b2 }
+    aB   => { aB, Ba }
+    bA   => { bA, Ab }
+    AB   => { AB, BA }
+    abb  => { abb, bba, AbbA }
+    aBB  => { aBB, BBa, ABBA }
+    Abb  => { Abb, bbA, abba }
+    ABB  => { ABB, BBA, aBBa, bAbbb }
+    abbb => { abbb, bbba }
+    Abbb => { Abbb, bbbA, bAbb }
 
 Total Words : 65
-Total Time  : 355 ms; Total Created Words : 44532
+Total Time  : 347 ms; Total Created Words : 42769
 ```
 and
 ```
@@ -227,10 +227,10 @@ Table
 abcabc  acabc  bcabc  abcab   cabc   acab   bcab   abcb   abca    cab    acb    aca    bcb    bca    abc     cb     ca     ac     bc     ab      c      a      b     ()
 
 Classes
-    ()     => { (), a2, b2, c2, a-2, b-2, c-2, abab, baba, acacac, bcbcbc, cacaca, cbcbcb }
-    a      => { a, a-1, bab, cacac }
-    b      => { b, b-1, aba, cbcbc }
-    c      => { c, c-1, acaca, bcbcb }
+    ()     => { (), aa, bb, cc, AA, BB, CC, abab, baba, acacac, bcbcbc, cacaca, cbcbcb }
+    a      => { a, A, bab, cacac }
+    b      => { b, B, aba, cbcbc }
+    c      => { c, C, acaca, bcbcb }
     ab     => { ab, ba }
     ac     => { ac, caca }
     bc     => { bc, cbcb }
@@ -253,7 +253,7 @@ Classes
     abcabc => { abcabc }
 
 Total Words : 56
-Total Time  : 558 ms; Total Created Words : 95049
+Total Time  : 623 ms; Total Created Words : 94273
 ```
 
 ## More working Examples
