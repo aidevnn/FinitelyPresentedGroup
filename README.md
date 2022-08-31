@@ -1,7 +1,5 @@
 # FinitelyPresentedGroup
 Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very slow even for smallest groups.
-
-For example, it takes ~4000ms for generating Frobenius group $F_{20}$.
 ``` 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 
@@ -17,10 +15,7 @@ WordGroup.Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
 ```
 will produce
 ```
-WordGroup.Generate("a2", "b2", "abab"); // Klein
-
-output :
-
+<(a,b)| a2, b2, abab >
 G = { (), a, b, ab }
 Order      : 4
 Is Group   : True
@@ -39,14 +34,11 @@ Classes
     ab => { ab, ba }
 
 Total Words : 15
-Total Time  : 10 ms; Total Created Words : 1778
+Total Time  : 10 ms; Total Created Words : 276
 ```
 and
 ```
-WordGroup.Generate("a3", "b2", "aba-1b-1"); // C6
-
-output :
-
+<(a,b)| a3, b2, aba-1b-1 >
 G = { (), a, b, A, ab, bA }
 Order      : 6
 Is Group   : True
@@ -69,14 +61,11 @@ Classes
     bA => { bA, Ab }
 
 Total Words : 23
-Total Time  : 31 ms; Total Created Words : 3830
+Total Time  : 12 ms; Total Created Words : 499
 ```
 and
 ```
-WordGroup.Generate("a2", "b2", "ababab"); // S3
-
-output :
-
+<(a,b)| a2, b2, ababab >
 G = { (), a, b, ab, ba, aba }
 Order      : 6
 Is Group   : True
@@ -99,14 +88,11 @@ Classes
     aba => { aba, bab }
 
 Total Words : 19
-Total Time  : 27 ms; Total Created Words : 3207
+Total Time  : 5 ms; Total Created Words : 518
 ```
 and
 ```
-WordGroup.Generate("a4", "a2b-2", "b-1aba"); // H8
-
-output :
-
+<(a,b)| a4, a2b-2, b-1aba >
 G = { (), a, b, A, B, aa, ab, ba }
 Order      : 8
 Is Group   : True
@@ -129,18 +115,15 @@ Classes
     A  => { A, aaa, aBB, BBa, baB }
     B  => { B, bbb, baa, aab, abA, ABA }
     aa => { aa, bb, AA, BB }
-    ab => { ab, bA, Ba, AB, bbba }
-    ba => { ba, aB, Ab, BA, abbb }
+    ab => { ab, bA, Ba, AB }
+    ba => { ba, aB, Ab, BA }
 
-Total Words : 52
-Total Time  : 256 ms; Total Created Words : 35401
+Total Words : 50
+Total Time  : 38 ms; Total Created Words : 4037
 ```
 and
 ```
-WordGroup.Generate("a3", "b6", "ab = ba"); // C3 x C6
-
-output :
-
+<(a,b)| a3, b6, ab = ba >
 G = { (), a, b, A, B, bb, BB, bbb, ab, aB, bA, AB, abb, aBB, Abb, ABB, abbb, Abbb }
 Order      : 18
 Is Group   : True
@@ -172,29 +155,26 @@ Classes
     b    => { b, BBBBB, abA, Aba }
     A    => { A, aa, bAB, BAb }
     B    => { B, bbbbb, aBA, ABa }
-    bb   => { bb, BBBB, abbA, Abba }
-    BB   => { BB, bbbb, aBBA, ABBa }
+    bb   => { bb, BBBB, Abba }
+    BB   => { BB, bbbb }
     bbb  => { bbb, BBB }
     ab   => { ab, ba }
     aB   => { aB, Ba }
     bA   => { bA, Ab }
     AB   => { AB, BA }
-    abb  => { abb, bba, AbbA }
+    abb  => { abb, bba }
     aBB  => { aBB, BBa, ABBA }
     Abb  => { Abb, bbA, abba }
-    ABB  => { ABB, BBA, aBBa, bAbbb }
+    ABB  => { ABB, BBA }
     abbb => { abbb, bbba }
-    Abbb => { Abbb, bbbA, bAbb }
+    Abbb => { Abbb, bbbA, bAbb, bbaba }
 
-Total Words : 65
-Total Time  : 347 ms; Total Created Words : 42769
+Total Words : 60
+Total Time  : 156 ms; Total Created Words : 14696
 ```
 and
 ```
-WordGroup.Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
-
-output :
-
+<(a,b,c)| a2, b2, c2, bcbcbc, acacac, abab >
 G = { (), a, b, c, ab, ac, bc, ca, cb, abc, aca, acb, bca, bcb, cab, abca, abcb, acab, bcab, cabc, abcab, acabc, bcabc, abcabc }
 Order      : 24
 Is Group   : True
@@ -244,16 +224,16 @@ Classes
     cab    => { cab }
     abca   => { abca }
     abcb   => { abcb }
-    acab   => { acab }
+    acab   => { acab, bcabcabc }
     bcab   => { bcab }
     cabc   => { cabc, acabcb, bcabca }
-    abcab  => { abcab }
-    acabc  => { acabc, cabcb }
-    bcabc  => { bcabc, cabca }
-    abcabc => { abcabc }
+    abcab  => { abcab, cabcabc }
+    acabc  => { acabc, cabcb, abcabca }
+    bcabc  => { bcabc, cabca, abcabcb }
+    abcabc => { abcabc, acabca, bcabcb, cabcab }
 
-Total Words : 56
-Total Time  : 623 ms; Total Created Words : 94273
+Total Words : 63
+Total Time  : 289 ms; Total Created Words : 29516
 ```
 
 ## More working Examples
@@ -264,7 +244,7 @@ WordGroup.Generate("a2", "b3", "ababab"); // A4
 WordGroup.Generate("a2", "b3", "ab-1ab"); // C6
 WordGroup.Generate("a4", "b3", "aba-1b");
 WordGroup.Generate("a4", "b3", "abab");
-WordGroup.Generate("a2", "b2", "c3", "abab", "bc=ca"); // S4
+WordGroup.Generate("a2", "b2", "c3", "abab", "bc=ca"); // S4 very slow 700ms
 WordGroup.Generate("a2", "b2", "c2", "abcbc"); // D4
 WordGroup.Generate("a6", "b4", "abab-1", "a3b2"); // H12
 WordGroup.Generate("a5", "b4", "abababab", "a2ba-1b-1"); // F20

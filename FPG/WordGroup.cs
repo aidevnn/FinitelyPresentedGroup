@@ -10,6 +10,8 @@ public class WordGroup
         foreach (var r in relations)
             Structure = Structure.RewriteStruct(Relation.Structure(r));
 
+        var gens = relations.SelectMany(r => r.Where(char.IsLetter)).Distinct().Ascending().ToArray();
+        Console.WriteLine("<({0})| {1} >", gens.Glue(","), relations.Glue(", "));
         Structure = Structure.LoopDevelop();
         Elements = Structure.Select(ws => ws.Key).Ascending().ToArray();
     }
@@ -50,6 +52,9 @@ public class WordGroup
         Console.WriteLine($"Is Group   : {isGroup}");
         Console.WriteLine($"Is Abelian : {isComm}");
         Console.WriteLine();
+
+        // if (isGroup) // stupid debugging
+        //     return;
 
         var digits = Elements.Max(w => w.extStr2.Length);
         var fmt = $"{{0,{digits}}}";
