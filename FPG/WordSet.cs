@@ -21,12 +21,10 @@ public class WordSet : IEnumerable<Word>
     public IEnumerator<Word> GetEnumerator() => set.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => set.GetEnumerator();
-    public void Display()
+    public void Display(int digits = 1)
     {
-        var digits = set.Max(w => w.ToString().Length);
-        Console.WriteLine($"Repr : {Key.extStr2}");
-        foreach (var w in set.Ascending())
-            Console.WriteLine($"    {w.Details(digits)}");
+        var fmt = $"{{0,-{digits}}}";
+        var reprs = string.Format(fmt, Key.extStr2);
+        Console.WriteLine($"    {reprs} => {{ {this.Ascending().Select(w => w.extStr2).Glue(", ")} }}");
     }
-
 }

@@ -59,12 +59,6 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
         return this.SequenceCompare(other);
     }
 
-    public string Details(int digits = 2)
-    {
-        var fmt = $"{{0,-{digits}}} => {extStr2}";
-        return string.Format(fmt, this);
-    }
-
     public override string ToString() => length == 0 ? "()" : letters.Glue();
     public override int GetHashCode() => extStr.GetHashCode();
 

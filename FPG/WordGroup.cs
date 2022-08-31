@@ -47,14 +47,14 @@ public class WordGroup
         // foreach (var c in cols) Console.WriteLine(c.Ascending().Glue(","));
         // Console.WriteLine();
 
+        // if (isGroup) // stupid debugging
+        //     return;
+
         Console.WriteLine("G = {{ {0} }}", Elements.Select(w => w.extStr2).Glue(", "));
         Console.WriteLine($"Order      : {keys.Count}");
         Console.WriteLine($"Is Group   : {isGroup}");
         Console.WriteLine($"Is Abelian : {isComm}");
         Console.WriteLine();
-
-        // if (isGroup) // stupid debugging
-        //     return;
 
         var digits = Elements.Max(w => w.extStr2.Length);
         var fmt = $"{{0,{digits}}}";
@@ -65,16 +65,7 @@ public class WordGroup
         Console.WriteLine();
 
         Console.WriteLine("Classes");
-        foreach (var ws in Structure.OrderBy(a => a.Key))
-            DisplayClasses(ws, fmt);
-
-        Console.WriteLine();
-        Console.WriteLine($"Total Words : {Structure.TotalWords}");
-    }
-    void DisplayClasses(WordSet ws, string fmt)
-    {
-        var reprs = string.Format(fmt.Replace("0,", "0,-"), ws.Key.extStr2);
-        Console.WriteLine($"    {reprs} => {{ {ws.Ascending().Select(w => w.extStr2).Glue(", ")} }}");
+        Structure.Display();
     }
     public static WordStructure Generate(params string[] relations)
     {

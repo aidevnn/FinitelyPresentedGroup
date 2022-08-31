@@ -13,20 +13,12 @@ public class WordStructure : IEnumerable<WordSet>
         var Pairs = Enumerable.Empty<(Word key, Word value)>();
         RegexList = new Dictionary<string, Regex>();
     }
-
-    public WordStructure(WordSet ws)
-    {
-        sets = new() { ws };
-        var ordSets = sets.Where(ws => ws.Count != 1).OrderByDescending(ws => ws.MaxWord.weight - ws.Key.weight).ThenByDescending(ws => ws.MaxWord);
-        RegexList = ordSets.ToDictionary(ws => ws.Key.extStr, ws => new Regex(ws.RegExPattern));
-    }
     public WordStructure(WordStructure wstr)
     {
         sets = wstr.sets.ToList();
         var ordSets = sets.Where(ws => ws.Count != 1).OrderByDescending(ws => ws.MaxWord.weight - ws.Key.weight).ThenByDescending(ws => ws.MaxWord);
         RegexList = ordSets.ToDictionary(ws => ws.Key.extStr, ws => new Regex(ws.RegExPattern));
     }
-
     public WordStructure(WordSet ws, WordStructure wstr)
     {
         var merged = new HashSet<Word>(ws);
@@ -64,30 +56,15 @@ public class WordStructure : IEnumerable<WordSet>
         return wi;
     }
     public int TotalWords => sets.Sum(ws => ws.Count);
-
     public void Display()
     {
+        var digits = sets.Max(a => a.Key.extStr.Length);
         foreach (var ws in sets.OrderBy(a => a.Key).ThenBy(a => a.Count))
-            ws.Display();
+            ws.Display(digits);
 
         Console.WriteLine();
         Console.WriteLine($"Total Words : {TotalWords}");
     }
-
-    public void DisplayReprs()
-    {
-        Console.WriteLine();
-        Console.WriteLine("G = {{ {0} }}", sets.Select(a => a.Key).Ascending().Glue(", "));
-
-        var digits = sets.Select(ws => ws.Key).Select(w => w.ToString().Length).Max();
-        foreach (var ws in sets.OrderBy(a => a.Key).ThenBy(a => a.Count))
-            Console.WriteLine(ws.Key.Details(digits));
-
-        Console.WriteLine();
-        Console.WriteLine($"Order = {sets.Count}");
-    }
-
     public IEnumerator<WordSet> GetEnumerator() => sets.GetEnumerator();
-
     IEnumerator IEnumerable.GetEnumerator() => sets.GetEnumerator();
 }

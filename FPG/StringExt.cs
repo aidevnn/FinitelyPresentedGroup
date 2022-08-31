@@ -16,8 +16,6 @@ public static class StringExt
         return d == 32 || d == -32;
     }
 
-    public static bool AreInvert(string s0, string s1) => s0.Length == s1.Length && s0.Zip(s1).All(e => AreInvert(e.First, e.Second));
-
     public static string Reduce(this string word)
     {
         Stack<char> stack = new Stack<char>(30);
