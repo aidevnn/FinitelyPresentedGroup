@@ -10,6 +10,8 @@ new WordGroup("a2", "b2", "abab"); // starting up
 // WordGroup.Generate("a2", "b3", "ab-1ab"); // C6
 // WordGroup.Generate("a4", "b3", "aba-1b"); // A4
 // WordGroup.Generate("a4", "b3", "abab"); // S4
+// WordGroup.Generate("a4", "b2", "ababab"); // S4
+// WordGroup.Generate("a2", "b2", "abababab");
 
 // WordGroup.Generate("a2", "b2", "c3", "abab", "bc=ca"); // S4
 // WordGroup.Generate("a3", "b2", "abab"); // S3
@@ -18,6 +20,10 @@ new WordGroup("a2", "b2", "abab"); // starting up
 // WordGroup.Generate("a6", "b4", "abab-1", "a3b2"); // H12
 // WordGroup.Generate("a5", "b4", "abababab", "a2ba-1b-1"); // F20
 // WordGroup.Generate("a3", "b2", "abab"); // S3
+
+// WordGroup.Generate("a2", "b3", "ababababab"); // A5 1000 ms
+// WordGroup.Generate("a2", "b3", "c5", "abc"); // A5 15000 ms
+// WordGroup.Generate("a4", "b4", "a2b2"); // too long time
 
 // WordGroup.Generate("a4", "b4", "abab-1");
 // WordGroup.Generate("a2", "b2", "c2", "abab", "acac", "bcbc"); // K8

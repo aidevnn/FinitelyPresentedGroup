@@ -11,10 +11,12 @@ public class WordGroup
             Structure = Structure.RewriteStruct(Relation.Structure(r));
 
         var gens = relations.SelectMany(r => r.Where(char.IsLetter)).Distinct().Ascending().ToArray();
-        Console.WriteLine("<({0})| {1} >", gens.Glue(","), relations.Glue(", "));
-        Structure = Structure.LoopDevelop();
+        Name = string.Format("<({0})| {1} >", gens.Glue(","), relations.Glue(", "));
+
+        Structure = Structure.LoopDevelop(5);
         Elements = Structure.Select(ws => ws.Key).Ascending().ToArray();
     }
+    string Name { get; }
     WordStructure Structure { get; }
     Word[] Elements { get; }
     public void DisplayElements()
@@ -47,14 +49,21 @@ public class WordGroup
         // foreach (var c in cols) Console.WriteLine(c.Ascending().Glue(","));
         // Console.WriteLine();
 
+        Console.WriteLine("G = {0}", Name);
         // if (isGroup) // stupid debugging
         //     return;
 
-        Console.WriteLine("G = {{ {0} }}", Elements.Select(w => w.extStr2).Glue(", "));
         Console.WriteLine($"Order      : {keys.Count}");
         Console.WriteLine($"Is Group   : {isGroup}");
         Console.WriteLine($"Is Abelian : {isComm}");
+        Console.WriteLine("G = {{ {0} }}", Elements.Select(w => w.extStr2).Glue(", "));
         Console.WriteLine();
+
+        if (Elements.Length > 40)
+        {
+            Console.WriteLine("*** TOO HUGE ***");
+            return;
+        }
 
         var digits = Elements.Max(w => w.extStr2.Length);
         var fmt = $"{{0,{digits}}}";
