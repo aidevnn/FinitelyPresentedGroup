@@ -1,5 +1,7 @@
 # FinitelyPresentedGroup
 Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very slow even for smallest groups.
+
+Benchmarks are single-threaded on a 2.9Ghz CPU
 ``` 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 
@@ -15,11 +17,11 @@ WordGroup.Generate("a2", "b2", "c2", "bcbcbc", "acacac", "abab"); // S4
 ```
 will produce
 ```
-<(a,b)| a2, b2, abab >
-G = { (), a, b, ab }
+G = <(a,b)| a2, b2, abab >
 Order      : 4
 Is Group   : True
 Is Abelian : True
+G = { (), a, b, ab }
 
 Table
 ()  a  b ab
@@ -28,21 +30,21 @@ Table
 ab  b  a ()
 
 Classes
-    () => { (), aa, bb, AA, BB, abab, baba }
+    () => { (), aa, bb, abab }
     a  => { a, A, bab }
     b  => { b, B, aba }
     ab => { ab, ba }
 
-Total Words : 15
-Total Time  : 10 ms; Total Created Words : 276
+Total Words : 12
+Total Time  : 1 ms; Total Created Words : 251
 ```
 and
 ```
-<(a,b)| a3, b2, aba-1b-1 >
-G = { (), a, b, A, ab, bA }
+G = <(a,b)| a3, b2, aba-1b-1 >
 Order      : 6
 Is Group   : True
 Is Abelian : True
+G = { (), a, b, A, ab, bA }
 
 Table
 ()  a  b  A ab bA
@@ -53,23 +55,23 @@ ab bA  a  b  A ()
 bA  b  A ab ()  a
 
 Classes
-    () => { (), bb, BB, aaa, AAA, abAb, babA, bAba, Abab }
+    () => { (), bb, aaa, abAb }
     a  => { a, AA, bab }
     b  => { b, B, abA, Aba }
     A  => { A, aa, bAb }
     ab => { ab, ba }
     bA => { bA, Ab }
 
-Total Words : 23
-Total Time  : 12 ms; Total Created Words : 499
+Total Words : 18
+Total Time  : 3 ms; Total Created Words : 454
 ```
 and
 ```
-<(a,b)| a2, b2, ababab >
-G = { (), a, b, ab, ba, aba }
+G = <(a,b)| a2, b2, ababab >
 Order      : 6
 Is Group   : True
 Is Abelian : False
+G = { (), a, b, ab, ba, aba }
 
 Table
  ()   a   b  ab  ba aba
@@ -80,23 +82,23 @@ Table
 aba  ab  ba   a   b  ()
 
 Classes
-    ()  => { (), aa, bb, AA, BB, ababab, bababa }
+    ()  => { (), aa, bb, ababab }
     a   => { a, A, babab }
     b   => { b, B, ababa }
     ab  => { ab, baba }
     ba  => { ba, abab }
     aba => { aba, bab }
 
-Total Words : 19
-Total Time  : 5 ms; Total Created Words : 518
+Total Words : 16
+Total Time  : 3 ms; Total Created Words : 491
 ```
 and
 ```
-<(a,b)| a4, a2b-2, b-1aba >
-G = { (), a, b, A, B, aa, ab, ba }
+G = <(a,b)| a4, a2b-2, b-1aba >
 Order      : 8
 Is Group   : True
 Is Abelian : False
+G = { (), a, b, A, B, aa, ab, ba }
 
 Table
 ()  a  b  A  B aa ab ba
@@ -109,7 +111,7 @@ ab  b  A  B  a ba aa ()
 ba  B  a  b  A ab () aa
 
 Classes
-    () => { (), aaaa, AAAA, aabb, bbaa, aaBB, BBaa, baab, aBBa, AbbA, BaaB, abaB, babA, aBAB, bABA }
+    () => { (), aaaa, aaBB, babA }
     a  => { a, AAA, Abb, bbA, bab, bAB }
     b  => { b, BBB, Baa, aaB, aba, aBA }
     A  => { A, aaa, aBB, BBa, baB }
@@ -118,16 +120,16 @@ Classes
     ab => { ab, bA, Ba, AB }
     ba => { ba, aB, Ab, BA }
 
-Total Words : 50
-Total Time  : 38 ms; Total Created Words : 4037
+Total Words : 39
+Total Time  : 18 ms; Total Created Words : 3257
 ```
 and
 ```
-<(a,b)| a3, b6, ab = ba >
-G = { (), a, b, A, B, bb, BB, bbb, ab, aB, bA, AB, abb, aBB, Abb, ABB, abbb, Abbb }
+G = <(a,b)| a3, b6, ab = ba >
 Order      : 18
 Is Group   : True
 Is Abelian : True
+G = { (), a, b, A, B, bb, BB, bbb, ab, aB, bA, AB, abb, aBB, Abb, ABB, abbb, Abbb }
 
 Table
   ()    a    b    A    B   bb   BB  bbb   ab   aB   bA   AB  abb  aBB  Abb  ABB abbb Abbb
@@ -150,7 +152,7 @@ abbb Abbb  aBB  bbb  abb   aB   ab    a  ABB  Abb   BB   bb   AB   bA    B    b 
 Abbb  bbb  ABB abbb  Abb   AB   bA    A   BB   bb  aBB  abb    B    b   aB   ab   ()    a
 
 Classes
-    ()   => { (), aaa, AAA, bbbbbb, BBBBBB, abAB, aBAb, baBA, bABa, AbaB, ABab, BabA, BAba }
+    ()   => { (), aaa, bbbbbb, abAB }
     a    => { a, AA, baB, Bab }
     b    => { b, BBBBB, abA, Aba }
     A    => { A, aa, bAB, BAb }
@@ -169,16 +171,16 @@ Classes
     abbb => { abbb, bbba }
     Abbb => { Abbb, bbbA, bAbb, bbaba }
 
-Total Words : 60
-Total Time  : 156 ms; Total Created Words : 14696
+Total Words : 51
+Total Time  : 83 ms; Total Created Words : 13073
 ```
 and
 ```
-<(a,b,c)| a2, b2, c2, bcbcbc, acacac, abab >
-G = { (), a, b, c, ab, ac, bc, ca, cb, abc, aca, acb, bca, bcb, cab, abca, abcb, acab, bcab, cabc, abcab, acabc, bcabc, abcabc }
+G = <(a,b,c)| a2, b2, c2, bcbcbc, acacac, abab >
 Order      : 24
 Is Group   : True
 Is Abelian : False
+G = { (), a, b, c, ab, ac, bc, ca, cb, abc, aca, acb, bca, bcb, cab, abca, abcb, acab, bcab, cabc, abcab, acabc, bcabc, abcabc }
 
 Table
     ()      a      b      c     ab     ac     bc     ca     cb    abc    aca    acb    bca    bcb    cab   abca   abcb   acab   bcab   cabc  abcab  acabc  bcabc abcabc
@@ -207,7 +209,7 @@ Table
 abcabc  acabc  bcabc  abcab   cabc   acab   bcab   abcb   abca    cab    acb    aca    bcb    bca    abc     cb     ca     ac     bc     ab      c      a      b     ()
 
 Classes
-    ()     => { (), aa, bb, cc, AA, BB, CC, abab, baba, acacac, bcbcbc, cacaca, cbcbcb }
+    ()     => { (), aa, bb, cc, abab, acacac, bcbcbc }
     a      => { a, A, bab, cacac }
     b      => { b, B, aba, cbcbc }
     c      => { c, C, acaca, bcbcb }
@@ -232,8 +234,8 @@ Classes
     bcabc  => { bcabc, cabca, abcabcb }
     abcabc => { abcabc, acabca, bcabcb, cabcab }
 
-Total Words : 63
-Total Time  : 289 ms; Total Created Words : 29516
+Total Words : 57
+Total Time  : 178 ms; Total Created Words : 27776
 ```
 
 ## More working Examples

@@ -70,14 +70,13 @@ public static class WordStructureExt
     public static WordStructure DevelopProduct(this WordStructure wstr)
     {
         var words = wstr.Select(ws => ws.Key).ToHashSet();
-        var wsi = wstr.Select(ws => ws.Key.Invert()).ToArray();
-
         List<WordSet> sets = new();
         foreach (var ws0 in wstr)
         {
-            foreach (var wi in wsi)
+            var wi0 = ws0.Key.Invert();
+            foreach (var ws1 in wstr)
             {
-                var w2 = wstr.ReduceWord(wi.Add(ws0.Key));
+                var w2 = wstr.ReduceWord(wi0.Add(ws1.Key));
                 if (!words.Contains(w2))
                 {
                     sets.Add(ws0);

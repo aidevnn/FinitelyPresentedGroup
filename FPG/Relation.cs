@@ -24,7 +24,8 @@ public class Relation
 
     public void Build()
     {
-        HashSet<Word> eq = new() { Word.Empty };
+        HashSet<Word> eq = new() { Word.Empty, word };
+        structure = new(new(eq), structure);
         for (int k = 0; k < word.extStr.Length; ++k)
         {
             var s0 = word.extStr.Take(k).Glue();
@@ -33,17 +34,16 @@ public class Relation
             eq.Add(w0);
         }
 
-        structure = new WordStructure(new(eq), structure);
         foreach (var w in eq)
         {
-            for (int k = 0; k < w.extStr.Length; ++k)
+            for (int k = 1; k < w.extStr.Length; ++k)
             {
                 var s0 = w.extStr.Take(k).Glue();
                 var s1 = w.extStr.Skip(k).Glue();
                 var w0 = new Word(s0);
-                var w1 = new Word(s1).Invert();
-                var ws = new WordSet(new[] { w0, w1 });
-                structure = new WordStructure(ws, structure);
+                var w1 = new Word(s1);
+                var ws0 = new WordSet(new[] { w0, w1.Invert() });
+                structure = new(ws0, structure);
             }
         }
     }

@@ -7,10 +7,11 @@ public class WordGroup
     public WordGroup(params string[] relations)
     {
         Structure = new();
+        var gens = relations.SelectMany(r => r.Where(char.IsLetter)).Distinct().Ascending().ToArray();
+
         foreach (var r in relations)
             Structure = Structure.RewriteStruct(Relation.Structure(r));
 
-        var gens = relations.SelectMany(r => r.Where(char.IsLetter)).Distinct().Ascending().ToArray();
         Name = string.Format("<({0})| {1} >", gens.Glue(","), relations.Glue(", "));
 
         Structure = Structure.LoopDevelop(5);
@@ -50,7 +51,7 @@ public class WordGroup
         // Console.WriteLine();
 
         Console.WriteLine("G = {0}", Name);
-        // if (isGroup) // stupid debugging
+        // if (isGroup) // uncomment for testing
         //     return;
 
         Console.WriteLine($"Order      : {keys.Count}");
