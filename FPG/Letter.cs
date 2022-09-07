@@ -21,21 +21,9 @@ public struct Letter : IEquatable<Letter>, IComparable<Letter>
 
     public override int GetHashCode() => HashCode.Combine(c, pow);
     public override string ToString() => pow == 1 ? $"{c}" : $"{c}{pow}";
-
+    (int, int, char) ToTuple() => (weight, -sgn, c);
     public bool Equals(Letter other) => c == other.c && pow == other.pow;
-    public int CompareTo(Letter other)
-    {
-        var compW = weight.CompareTo(other.weight);
-        if (compW != 0)
-            return compW;
-
-        var compS = -sgn.CompareTo(other.sgn);
-        if (compS != 0)
-            return compS;
-
-        return c.CompareTo(other.c);
-    }
-
+    public int CompareTo(Letter other) => this.ToTuple().CompareTo(other.ToTuple());
     public static implicit operator Letter((char c, int p) e) => new Letter(e.c, e.p);
     public static implicit operator Letter(char c) => char.IsLower(c) ? (c, 1) : (char.ToLower(c), -1);
 }

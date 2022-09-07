@@ -11,7 +11,7 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
     public Word()
     {
         letters = Enumerable.Empty<Letter>();
-        weight = length = 0;
+        weight = length = Cpow = 0;
         extStr = "";
     }
     public Word(IEnumerable<Letter> l)
@@ -20,6 +20,7 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
         length = letters.Count();
         weight = letters.Sum(l => l.weight);
         extStr = new String(letters.SelectMany(l => l.Extend()).ToArray());
+        Cpow = letters.Count(l => l.pow < 0);
         ++Word.count;
     }
     public Word(string word)
@@ -28,6 +29,7 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
         length = letters.Count();
         weight = letters.Sum(l => l.weight);
         extStr = new String(letters.SelectMany(l => l.Extend()).ToArray());
+        Cpow = letters.Count(l => l.pow < 0);
         ++Word.count;
     }
     public Word Add(Word w) => new Word(this.Concat(w).Reduce());
@@ -35,26 +37,19 @@ public struct Word : IEnumerable<Letter>, IEquatable<Word>, IComparable<Word>
     public int length { get; }
     public int weight { get; }
     public string extStr { get; }
+    int Cpow { get; }
     public string extStr2 => length == 0 ? "()" : extStr;
 
     public IEnumerator<Letter> GetEnumerator() => letters.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => letters.GetEnumerator();
 
     public bool Equals(Word other) => string.Equals(extStr, other.extStr);
-
+    (int, int, int) ToTuple() => (length, weight, Cpow);
     public int CompareTo(Word other)
     {
-        var compL = length.CompareTo(other.length);
-        if (compL != 0)
-            return compL;
-
-        var compW = weight.CompareTo(other.weight);
-        if (compW != 0)
-            return compW;
-
-        var compP = this.Count(l => l.pow < 0).CompareTo(other.Count(l => l.pow < 0));
-        if (compP != 0)
-            return compP;
+        var comp = this.ToTuple().CompareTo(other.ToTuple());
+        if (comp != 0)
+            return comp;
 
         return this.SequenceCompare(other);
     }
