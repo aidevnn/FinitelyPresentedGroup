@@ -51,8 +51,8 @@ public class WordGroup
         // Console.WriteLine();
 
         Console.WriteLine("G = {0}", Name);
-        if (isGroup) // uncomment for testing
-            return;
+        // if (isGroup) // uncomment for testing
+        //     return;
 
         Console.WriteLine($"Order      : {keys.Count}");
         Console.WriteLine($"Is Group   : {isGroup}");
