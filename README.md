@@ -257,3 +257,7 @@ WordGroup.Generate("a2", "b3", "ababababab"); // A5 1000 ms
 WordGroup.Generate("a2", "b3", "c5", "abc"); // 15000 ms
 WordGroup.Generate("a4", "b4", "a2b2"); // too long time
 ```
+
+# Reference
+
+ALGÈBRE T1 Groupes, corps et théorie de Galois. <b>Daniel Guin, Thomas Hausberger</b>
