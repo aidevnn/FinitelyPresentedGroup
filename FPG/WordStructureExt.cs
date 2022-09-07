@@ -73,11 +73,18 @@ public static class WordStructureExt
         List<WordSet> sets = new();
         foreach (var ws0 in wstr)
         {
+            var w2 = wstr.ReduceWord(ws0.Key.Add(ws0.Key));
+            if (!words.Contains(w2))
+            {
+                sets.Add(ws0);
+                continue;
+            }
+
             var wi0 = ws0.Key.Invert();
             foreach (var ws1 in wstr)
             {
-                var w2 = wstr.ReduceWord(wi0.Add(ws1.Key));
-                if (!words.Contains(w2))
+                var wi2 = wstr.ReduceWord(wi0.Add(ws1.Key));
+                if (!words.Contains(wi2))
                 {
                     sets.Add(ws0);
                     break;
@@ -97,10 +104,10 @@ public static class WordStructureExt
         for (int k = 0; k < loopMax; ++k)
         {
             int sz0 = wstr0.TotalWords;
-            wstr0 = wstr0.DevelopProduct();
+            wstr0 = wstr0.DevelopProduct().RewriteSelf();
             if (sz0 == wstr0.TotalWords)
                 break;
         }
-        return wstr0.RewriteSelf();
+        return wstr0;
     }
 }
