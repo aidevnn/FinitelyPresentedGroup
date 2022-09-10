@@ -1,6 +1,6 @@
 ﻿using FPG;
 
-// new WordGroup("a2", "b2", "abab"); // starting up
+new WordGroup("a2", "b2", "abab"); // starting up
 
 // WordGroup.Generate("a6"); // C6
 // WordGroup.Generate("a3", "b=a2");
@@ -25,11 +25,13 @@
 // WordGroup.Generate("a2", "b3", "ababababab"); // A5 1000 ms
 // // WordGroup.Generate("a2", "b3", "c5", "abc"); // A5 15000 ms
 // // WordGroup.Generate("a4", "b4", "a2b2"); // too long time
-// // WordGroup.Generate("a2", "b2", "c2", "d2", "ababab", "bcbcbc", "cdcdcd", "acac", "adad", "bdbd"); // S5 75000 ms 
+// // WordGroup.Generate("a2", "b2", "c2", "d2", "ababab", "bcbcbc", "cdcdcd", "acac", "adad", "bdbd"); // S5 90000 ms 
 
 // WordGroup.Generate("a4", "b4", "abab-1");
 // WordGroup.Generate("a2", "b2", "c2", "abab", "acac", "bcbc"); // K8
 // WordGroup.Generate("a2", "b2", "c3", "abab", "acac", "bc=cb");
+// WordGroup.Generate("a7", "b3", "a2b = ba"); // C7 <x C3
+// WordGroup.Generate("a7", "b3", "ab = ba"); // C7 x C3
 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 WordGroup.Generate("a3", "b2", "aba-1b-1"); // C6

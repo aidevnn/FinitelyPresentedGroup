@@ -49,10 +49,10 @@ public static class StringExt
 
     public static string LoopReduce(this string input, string replacement, Regex rg)
     {
-        int sz = 0;
-        while (sz != input.Length)
+        var tmp = ".";
+        while (tmp.GetHashCode() != input.GetHashCode())
         {
-            sz = input.Length;
+            tmp = input;
             input = rg.Replace(input, replacement);
         }
 

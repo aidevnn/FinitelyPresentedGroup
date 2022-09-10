@@ -20,8 +20,9 @@ public class Relation
 
         structure = new();
         Build();
+        // BuildMinimalist();
     }
-
+    // Equivalents relations and maximum words equivalents that can be deduced. 
     public void Build()
     {
         HashSet<Word> eq = new() { Word.Empty, word };
@@ -46,6 +47,17 @@ public class Relation
                 structure = new(ws0, structure);
             }
         }
+    }
+    // Only generators and one relation, it works but slower
+    public void BuildMinimalist()
+    {
+        HashSet<Word> eq = new() { Word.Empty, word };
+        structure = new(new(eq), structure);
+
+        var gens = word.SelectMany(l => l.Extend()).Where(char.IsLower).Select(c => new Word($"{c}")).Distinct();
+        gens = gens.Concat(gens.Select(w => w.Invert())).Distinct();
+        foreach (var w in gens)
+            structure = new(new WordSet(w), structure);
     }
 
     public void Display()

@@ -16,7 +16,7 @@ public class WordStructure : IEnumerable<WordSet>
     public WordStructure(WordStructure wstr)
     {
         sets = wstr.sets.ToList();
-        var ordSets = sets.Where(ws => ws.Count != 1).OrderByDescending(ws => ws.MaxWord.weight - ws.Key.weight).ThenByDescending(ws => ws.MaxWord);
+        var ordSets = sets.Where(ws => ws.Count != 1).OrderBy(ws => ws.Key);
         RegexList = ordSets.ToDictionary(ws => ws.Key.extStr, ws => new Regex(ws.RegExPattern));
     }
     public WordStructure(WordSet ws, WordStructure wstr)
@@ -31,7 +31,7 @@ public class WordStructure : IEnumerable<WordSet>
                 sets.Add(ws0);
         }
         sets.Add(new WordSet(merged));
-        var ordSets = sets.Where(ws => ws.Count != 1).OrderByDescending(ws => ws.MaxWord.weight - ws.Key.weight).ThenByDescending(ws => ws.MaxWord);
+        var ordSets = sets.Where(ws => ws.Count != 1).OrderBy(ws => ws.Key);
         RegexList = ordSets.ToDictionary(ws => ws.Key.extStr, ws => new Regex(ws.RegExPattern));
     }
     public Word ReduceWord(Word w)
