@@ -2,6 +2,12 @@
 Bruteforce algorithm for creating all elements of a group presented by generators and relations. This current version runs very slow even for smallest groups.
 
 Benchmarks are single-threaded on a 2.9Ghz CPU
+
+## Moved to FastGoat Project
+
+The Todd Coxeter procedure is more performant than this code, which a part of the project [FastGoat](https://github.com/aidevnn/FastGoat)
+This project will be archived.
+
 ``` 
 WordGroup.Generate("a2", "b2", "abab"); // Klein
 
